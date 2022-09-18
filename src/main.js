@@ -6,32 +6,38 @@ import {createStore} from 'vuex'
 const store = createStore ({
     state(){
         return {
-            numberOfPlayers: "",
+            numberOfPlayers: 0,
             newPlayers: [],
             typeOfGame: "pingPong",
             matches: []
         }
     },
     mutations:{
-        addPlayers() {
-console.log("mutation")
-    //         console.log("adding number of players", this.numberOfPlayers )
-    //         const newPlayers = [];
+        setNumberOfPlayers(state, payload){
+            console.log(state)
+            state.numberOfPlayers = payload
+
+        },
+        addPlayers(state) {
+            console.log("mutation", state)
+            console.log("adding number of players", state.numberOfPlayers )
+            const newPlayers = [];
   
-    //        for (let i = 0; i < this.numberOfPlayers; i++) {
-    //             const newPlayer = {
-    //             name: "",
-    //             playerIndex: i,
-    //             skills: 0,
-    //             points: 0,
-    //             }
-    //         this.newPlayers.push(newPlayer);
-    //         console.log(newPlayer.playerIndex, "index")
-    //         }
+           for (let i = 0; i < state.numberOfPlayers; i++) {
+            console.log("for")
+                const newPlayer = {
+                name: "",
+                playerIndex: i,
+                skills: 0,
+                points: 0,
+                }
+            state.newPlayers.push(newPlayer);
+            console.log(newPlayer.playerIndex, "index")
+            }
   
-    // console.table(newPlayers);
-    // console.log("mutation de vuex")
-    // return newPlayers;
+ 
+    console.log("state.newPlayers", state.newPlayers)
+    return newPlayers;
         },
 }
 

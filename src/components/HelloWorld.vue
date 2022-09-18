@@ -11,9 +11,9 @@
     
 
     <div  class="playerInputsList">
-      <button @click="$store.mutations.addPlayers">Set players inputs
+      <button @click="addPlayers">Set players inputs
       </button>
-    <li v-for="(player, index) in newPlayers" v-bind:key="index" class="playerInputRow">
+    <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
 <p>player, index: {{index -1}}</p>
 <input type="text" placeholder="Player name" v-on:input="setNames($event, index)">
 <!-- <input type="text" >poner dentro de este input que envie al metodo que sea son v.bind o lo que sea el index y dentro que le asigne al player con se index ese nommbre -->
@@ -41,10 +41,23 @@ export default {
       typeOfGame: "",
       matches: []
   }},
+  watch:{
+    numberOfPlayers() {
+      console.log("entrando en el watch")
+      this.$store.commit('setNumberOfPlayers', this.numberOfPlayers)
+   
+    }
+  },
   methods:{
+    // numberOfPlayers(){
+    //   console.log("this.numberOfPlayers", this.numberOfPlayers)
+    //   this.$store.commit('setNumberOfPlayers', this.numberOfPlayers)
+    // },
     addPlayers() {
+      // console.log("llamo al addplayers")
         this.$store.commit('addPlayers')
-  //     console.log("adding number of players", this.numberOfPlayers )
+        // console.log("store", this.$store.state)
+  //     console.log("adding number of players", stete.numberOfPlayers )
   //     const newPlayers = [];
 
   //     for (let i = 0; i < this.numberOfPlayers; i++) {
