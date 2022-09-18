@@ -2,6 +2,8 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
 <h4>What are you playing?</h4>
+<h4>{{$store.state.typeOfGame}}</h4>
+
 <input type="text" v-model="typeOfGame" >
 <br>
 <hr>  
@@ -9,7 +11,7 @@
     
 
     <div  class="playerInputsList">
-      <button @click="addPlayers">Set players inputs
+      <button @click="$store.mutations.addPlayers">Set players inputs
       </button>
     <li v-for="(player, index) in newPlayers" v-bind:key="index" class="playerInputRow">
 <p>player, index: {{index -1}}</p>
@@ -19,7 +21,7 @@
       <button @click="addPlayers">display matches</button>
   
       <li v-for="(match, index) in matches" v-bind:key="index" class="PlayerNameList">
-        <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} vs {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p>
+        <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p>
         <p>{{}}</p>
         </li>
         <button @click="makeMatches">c</button>
@@ -41,23 +43,23 @@ export default {
   }},
   methods:{
     addPlayers() {
+        this.$store.commit('addPlayers')
+  //     console.log("adding number of players", this.numberOfPlayers )
+  //     const newPlayers = [];
 
-      console.log("adding number of players", this.numberOfPlayers )
-      const newPlayers = [];
+  //     for (let i = 0; i < this.numberOfPlayers; i++) {
+  //       const newPlayer = {
+  //       name: "",
+  //       playerIndex: i,
+  //       skills: 0,
+  //       points: 0,
+  //       }
+  //     this.newPlayers.push(newPlayer);
+  //     console.log(newPlayer.playerIndex, "index")
+  //     }
 
-      for (let i = 0; i < this.numberOfPlayers; i++) {
-        const newPlayer = {
-        name: "",
-        playerIndex: i,
-        skills: 0,
-        points: 0,
-        }
-      this.newPlayers.push(newPlayer);
-      console.log(newPlayer.playerIndex, "index")
-      }
-
-  console.table(newPlayers);
-  return newPlayers;
+  // console.table(newPlayers);
+  // return newPlayers;
       },
       setNames(event, id){
         console.log("id", id)
