@@ -13,15 +13,15 @@
     <div  class="playerInputsList">
       <button @click="addPlayers">Set players inputs
       </button>
-    <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
-<p>player, index: {{index -1}}</p>
-<input type="text" placeholder="Player name" v-on:input="setNames($event, index)">
+       <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
+        <p>player, index: {{index -1}}</p>
+          <input type="text" placeholder="Player name" v-on:input="setNames($event, index)">
       </li></div>
       <button @click="makeMatches">display matches</button>
   
-      <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList">
-        <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p>
-        <p>{{}}</p>
+    <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList">
+      <div class="matchCard"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore($event, match.id)"> <input type="text" v-on:input="setMatchScore2($event, match.id)"> </div></div>
+      
         </li>
         <button @click="makeMatches">c</button>
   </div>
@@ -54,7 +54,15 @@ export default {
         },
         makeMatches() {
             this.$store.commit("makeMatches");
-        }
+        },
+        setMatchScore(event, id){
+          this.$store.commit("setMatchScore", { event: event, id: id });
+          // console.log("id del match",id)
+        },
+        setMatchScore2(event, id){
+          this.$store.commit("setMatchScore2", { event: event, id: id });
+          // console.log("id del match",id)
+        },
     },
     components: { SportType }
 }
@@ -63,19 +71,67 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.inputScore{
+  display: flex;
+  /* border: 2px solid red; */
+  align-items: center;
+  margin-right: 4rem;
+}
+
+.inputScore input{
+height: 25px;
+}
+
+
+  .matchCard{
+    display: flex;
+    background-color: rgb(240,240,240);
+border-radius: 10px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+font-size: 2rem;
+margin-bottom: 1rem;
+margin-top: 1rem;
+border: 3px solid green;
+  }
   .PlayerNameList{
 display: flex;
-flex-direction: column;
-border: 2px solid red;
+
+/* border: 2px solid red; */
+width: 100%;
+justify-content: center;
+align-items: center;
+/* height: 100px; */
+/* margin-bottom: 3rem; */
   }
+  .PlayerNameList p{
+/* border: 2px solid green; */
+width: 70%;
+margin-left: 4rem;
+margin-right: 5rem;
+/* background-color: rgb(240,240,240);
+border-radius: 10px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+font-size: 2rem; */
+  }
+  .PlayerNameList span{
+    font-size: 2.8rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+
   .playerInputRow{
     display: flex;
     justify-content: center;
+    border: 2px solid blue;
   }
 
 .playerInputsList{
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 h3 {

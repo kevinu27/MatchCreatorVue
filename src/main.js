@@ -126,6 +126,14 @@ console.log("matches final", matches)
 state.matches= matches
 console.log("state.matches",state.matches)
   
+    },
+    setMatchScore(state, payload){
+        console.log("id", payload.id)
+        console.log("event", payload.event.target.value)
+    },
+    setMatchScore2(state, payload){
+        console.log("id", payload.id)
+        console.log("event", payload.event.target.value)
     }
 }
 
