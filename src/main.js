@@ -131,13 +131,22 @@ console.log("state.matches",state.matches)
     },
     setMatchScore(state, payload){
       const points = parseInt(payload.event.target.value)
-      const id= parseInt(payload.id)
+      // const id= parseInt(payload.id)
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
       matchScoringPoints.teams[0].points = points
 
           //aqui poner el reducer de los points
-          
+        const player1and2Match = state.matches.find((match)=> match.id === payload.id)
+        console.log("player1and2Match", player1and2Match.teams[0].members[0].id)
+        const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
+        const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
+        console.log("idPlayer1", idPlayer1)
+        console.log("idPlayer2", idPlayer2)
+      //array con todos los puntos que hay que hacr reduce de un 
+
+
+
 
         // esto es para sacar por pantalla el ranking:
         console.log("state.matches", state.matches)
@@ -147,12 +156,19 @@ console.log("state.matches",state.matches)
         console.log("matchesFlateados", matchesFlateados)
         // console.log("matchesFlateados2", matchesFlateados.)
         const pointlist = matchesFlateados.filter((team)=> team.members.some((member)=>{
-          console.log("id:", id )
+           console.log("idPlayer1:", idPlayer1 )
           console.log("member.playerIndex:", member.playerIndex )
-       return   parseInt(member.playerIndex) === id} // id del partido, hay que poner id del jugador que juega ese partido
+       return   parseInt(member.playerIndex) === idPlayer1} // id del partido, hay que poner id del jugador que juega ese partido
           )).map((team) => team.points)
         console.log("pointlist", pointlist)
 
+
+        ///pseudocogico
+        // 1ºhacer un reduce de todos los puntos del jugador y eso ponerselo en points de ese jugador
+        // que lo 1º ocurra cada vez que se escribe en el input
+
+
+      
     },
     setMatchScore2(state, payload){
         const points = parseInt(payload.event.target.value)
