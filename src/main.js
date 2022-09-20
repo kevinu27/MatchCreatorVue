@@ -130,12 +130,13 @@ console.log("state.matches",state.matches)
   
     },
     setMatchScore(state, payload){
+      //////////
       const points = parseInt(payload.event.target.value)
       // const id= parseInt(payload.id)
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
       matchScoringPoints.teams[0].points = points
-
+      //  hasta aqui es para poner los puntos de cada equipo a cada equipo
           //aqui poner el reducer de los points
         const player1and2Match = state.matches.find((match)=> match.id === payload.id)
         console.log("player1and2Match", player1and2Match.teams[0].members[0].id)
