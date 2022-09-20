@@ -3,6 +3,8 @@ import App from './App.vue'
 import {createStore} from 'vuex'
 
 
+
+
 const store = createStore ({
     state(){
         return {
@@ -128,12 +130,34 @@ console.log("state.matches",state.matches)
   
     },
     setMatchScore(state, payload){
-        console.log("id", payload.id)
-        console.log("event", payload.event.target.value)
+      const points = parseInt(payload.event.target.value)
+      const id= parseInt(payload.id)
+      const stateMatchesCopy = [...state.matches]
+      const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
+      matchScoringPoints.teams[0].points = points
+
+          //aqui poner el reducer de los points
+          
+
+        // esto es para sacar por pantalla el ranking:
+        console.log("state.matches", state.matches)
+        console.log("-----------------")
+        console.log("state.matches", state.matches.map((match)=>  match.teams))
+        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
+        console.log("matchesFlateados", matchesFlateados)
+        // console.log("matchesFlateados2", matchesFlateados.)
+        const pointlist = matchesFlateados.filter((team)=> team.members.some((member)=>{
+          console.log("id:", id )
+          console.log("member.playerIndex:", member.playerIndex )
+       return   parseInt(member.playerIndex) === id} // id del partido, hay que poner id del jugador que juega ese partido
+          )).map((team) => team.points)
+        console.log("pointlist", pointlist)
+
     },
     setMatchScore2(state, payload){
-        console.log("id", payload.id)
-        console.log("event", payload.event.target.value)
+        const points = parseInt(payload.event.target.value)
+        const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
+        matchScoringPoints.teams[1].points = points
     }
 }
 

@@ -1,13 +1,13 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+         <h1>{{ msg }}</h1>
 
-<SportType></SportType>
+          <SportType></SportType>
 
-<input type="text" v-model="typeOfGame" >
-<br>
-<hr>  
-    <input type="number" v-model="numberOfPlayers" >
+        <input type="text" v-model="typeOfGame" >
+        <br>
+        <hr>  
+          <input type="number" v-model="numberOfPlayers" >
     
 
     <div  class="playerInputsList">
@@ -16,15 +16,17 @@
        <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
         <p>player, index: {{index -1}}</p>
           <input type="text" placeholder="Player name" v-on:input="setNames($event, index)">
-      </li></div>
-      <button @click="makeMatches">display matches</button>
+           </li></div>
   
-    <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList">
+  
+        <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList">
       <div class="matchCard"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore($event, match.id)"> <input type="text" v-on:input="setMatchScore2($event, match.id)"> </div></div>
       
         </li>
-        <button @click="makeMatches">c</button>
-  </div>
+        <button @click="makeMatches" class="btn btn-primary">display matches</button>
+
+       <div class="rankingNames" v-for="(newPlayers, index) in $store.state.newPlayers" v-bind:key="index" ><h2>{{newPlayers.name}} ----- {{newPlayers.points}}</h2></div>
+         </div>
 </template>
 
 <script>
@@ -71,6 +73,16 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.rankingNames{
+  display: flex;
+  flex-direction: column;
+}
+.rankingNames h2{
+border: 2px solid red;
+margin: 0px;
+margin-top: 1.5rem;
+}
+
 
 .inputScore{
   display: flex;
@@ -81,6 +93,7 @@ export default {
 
 .inputScore input{
 height: 25px;
+margin-left: 2rem;
 }
 
 
