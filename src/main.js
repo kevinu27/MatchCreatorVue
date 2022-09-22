@@ -144,66 +144,78 @@ console.log("state.matches",state.matches)
       const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
       console.log("idPlayer1", idPlayer1)
       console.log("idPlayer2", idPlayer2)
-
-      /// iterar matchesFlateados e ir repartiendo lo valores a los jugadores desde aqui de alguna manera  
-      // o iterar cada jugar y con su indexPlayer pedir que le metan el reduce de todos los puntos que le tocan iterando matches
-        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()  //// estoy contiene los equipos y los puntos del equipo, muy clave***, o sea de aqui hay que iterar para para buscar los puntos de los inputs
-        console.log("matchesFlateados", matchesFlateados)
+        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
 
         for(let i=0; i < state.newPlayers.length; i++){
             let pointsArrayToPushToThePlayer = [0,0]
-            console.log("state.newPlayers-------", state.newPlayers[i].playerIndex)
             const playerToPushThePointsId =state.newPlayers[i].playerIndex
             const reducer = (previousValue, currentValue) => previousValue + currentValue;
-            const pointReduced = pointsArrayToPushToThePlayer.reduce(reducer);
-            console.log("matchesFlateados!!!!!------!!!!", matchesFlateados)
-            console.log("players", state.newPlayers)
             for(let j=0; j < matchesFlateados.length; j++){
-
                 if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
-                    console.log("entro en el if")
                     pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-                    console.log("pointsArrayToPushToThePlayer", pointsArrayToPushToThePlayer)
-                    console.log("matchesFlateados[i].points", matchesFlateados[j].points)
-
-                    // matchesFlateados[i].members[0].points.push(matchesFlateados[i].points)
-                   
-                    console.log("pointReduced111------", pointReduced)
+                    console.log("----------------", pointsArrayToPushToThePlayer)
                 }
             }
                 state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-                console.log("reducion de puntos!!!!!!-------", state.newPlayers[i].points)
-                console.log("pointsArrayToPushToThePlayer", pointsArrayToPushToThePlayer)
         }
+        // for(let i=0; i < state.newPlayers.length; i++){
+        //     let pointsArrayToPushToThePlayer = [0,0]
+        //     const playerToPushThePointsId =state.newPlayers[i].playerIndex
+        //     const reducer = (previousValue, currentValue) => previousValue + currentValue;
+        //     for(let j=0; j < matchesFlateados.length; j++){
+
+        //         if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+        //             pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+        //         }
+        //     }
+        //         state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+        // }
+
+
+        
             console.log("state.newPlayers-------", state.newPlayers)
-
-    //  const playersCopy = [...state.matches]
-    //   const teamsMappedFromMatches = [...state.matches]
-    //   .map((match) => match.teams)
-    //   .flat();
-    // const pointList = teamsMappedFromMatches
-    //   .filter((team) => team.members.some((member) => member.id === idPlayer1))
-    //   .map((team) => team.points);
-    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    // const pointReduced = pointList.reduce(reducer);
-    // playersCopy.forEach((player) => {
-    //   if (player.id === idPlayer1) {
-    //     player.points = pointReduced;
-    //   }
-    // });
-    // console.log("players", playersCopy);
-    // console.log("pointReduced", pointReduced);
-    
-
-
-    //   state.matches
-    //  const players = state.newPlayers
-
     },
     setMatchScore2(state, payload){
         const points = parseInt(payload.event.target.value)
         const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
         matchScoringPoints.teams[1].points = points
+
+        const player1and2Match = state.matches.find((match)=> match.id === payload.id)
+        const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
+        const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
+        console.log("idPlayer1", idPlayer1)
+        console.log("idPlayer2", idPlayer2)
+        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
+    
+        for(let i=0; i < state.newPlayers.length; i++){
+            let pointsArrayToPushToThePlayer = [0,0]
+            const playerToPushThePointsId =state.newPlayers[i].playerIndex
+            const reducer = (previousValue, currentValue) => previousValue + currentValue;
+            for(let j=0; j < matchesFlateados.length; j++){
+    
+                if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
+                        pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+                }
+            }
+            state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+        }
+
+        for(let i=0; i < state.newPlayers.length; i++){
+            let pointsArrayToPushToThePlayer = [0,0]
+            const playerToPushThePointsId =state.newPlayers[i].playerIndex
+            const reducer = (previousValue, currentValue) => previousValue + currentValue;
+            for(let j=0; j < matchesFlateados.length; j++){
+    
+                if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+                        pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+                }
+            }
+            state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+        }
+    
+    
+            
+                console.log("state.newPlayers-------", state.newPlayers)
     },
 
 }
