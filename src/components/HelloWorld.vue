@@ -39,15 +39,21 @@ export default {
     data() {
         return {
             numberOfPlayers: "",
+
         };
     },
     watch: {
         numberOfPlayers() {
             console.log("entrando en el watch");
             this.$store.commit("setNumberOfPlayers", this.numberOfPlayers);
-        }
+        },
+
+
     },
-    methods: {
+    methods: {        
+      onInputScoreAlert(){ 
+         this.$store.commit("onInputScoreAlert");
+        },
         addPlayers() {
             this.$store.commit("addPlayers");
         },
@@ -59,10 +65,14 @@ export default {
         },
         setMatchScore(event, id){
           this.$store.commit("setMatchScore", { event: event, id: id });
+       
+
           // console.log("id del match",id)
         },
         setMatchScore2(event, id){
           this.$store.commit("setMatchScore2", { event: event, id: id });
+        
+
           // console.log("id del match",id)
         },
     },

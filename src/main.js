@@ -136,46 +136,55 @@ console.log("state.matches",state.matches)
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
       matchScoringPoints.teams[0].points = points
-      //  hasta aqui es para poner los puntos de cada equipo a cada equipo
-          //aqui poner el reducer de los points
-        const player1and2Match = state.matches.find((match)=> match.id === payload.id)
-        console.log("player1and2Match", player1and2Match.teams[0].members[0].id)
-        const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
-        const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
-        console.log("idPlayer1", idPlayer1)
-        console.log("idPlayer2", idPlayer2)
-      //array con todos los puntos que hay que hacr reduce de un 
+      console.log("steta.matches", state.matches)
 
+      const player1and2Match = state.matches.find((match)=> match.id === payload.id)
+      console.log("player1and2Match", player1and2Match.teams[0].members[0].playerIndex)
+      const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
+      const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
+      console.log("idPlayer1", idPlayer1)
+      console.log("idPlayer2", idPlayer2)
 
-
-
-        // esto es para sacar por pantalla el ranking:
-        console.log("state.matches", state.matches)
-        console.log("-----------------")
-        console.log("state.matches", state.matches.map((match)=>  match.teams))
-        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
+      /// iterar matchesFlateados e ir repartiendo lo valores a los jugadores desde aqui de alguna manera  
+      // o iterar cada jugar y con su indexPlayer pedir que le metan el reduce de todos los puntos que le tocan iterando matches
+      const matchesFlateados = state.matches.map((match)=>  match.teams).flat()  //// estoy contiene los equipos y los puntos del equipo, muy clave***, o sea de aqui hay que iterar para para buscar los puntos de los inputs
         console.log("matchesFlateados", matchesFlateados)
-        // console.log("matchesFlateados2", matchesFlateados.)
-        const pointlist = matchesFlateados.filter((team)=> team.members.some((member)=>{
-           console.log("idPlayer1:", idPlayer1 )
-          console.log("member.playerIndex:", member.playerIndex )
-       return   parseInt(member.playerIndex) === idPlayer1} // id del partido, hay que poner id del jugador que juega ese partido
-          )).map((team) => team.points)
-        console.log("pointlist", pointlist)
+
+      for(let i=0; i < matchesFlateados.length; i++){
+        console.log("matchesFlateados.members", matchesFlateados[i].members)
+
+          }
 
 
-        ///pseudocogico
-        // 1ºhacer un reduce de todos los puntos del jugador y eso ponerselo en points de ese jugador
-        // que lo 1º ocurra cada vez que se escribe en el input
+    //  const playersCopy = [...state.matches]
+    //   const teamsMappedFromMatches = [...state.matches]
+    //   .map((match) => match.teams)
+    //   .flat();
+    // const pointList = teamsMappedFromMatches
+    //   .filter((team) => team.members.some((member) => member.id === idPlayer1))
+    //   .map((team) => team.points);
+    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    // const pointReduced = pointList.reduce(reducer);
+    // playersCopy.forEach((player) => {
+    //   if (player.id === idPlayer1) {
+    //     player.points = pointReduced;
+    //   }
+    // });
+    // console.log("players", playersCopy);
+    // console.log("pointReduced", pointReduced);
+    
 
 
-      
+    //   state.matches
+    //  const players = state.newPlayers
+
     },
     setMatchScore2(state, payload){
         const points = parseInt(payload.event.target.value)
         const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
         matchScoringPoints.teams[1].points = points
-    }
+    },
+
 }
 
 })
