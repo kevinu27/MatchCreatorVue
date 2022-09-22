@@ -151,14 +151,16 @@ console.log("state.matches",state.matches)
         console.log("matchesFlateados", matchesFlateados)
 
         for(let i=0; i < state.newPlayers.length; i++){
-            const pointsArrayToPushToThePlayer = [0,0]
+            let pointsArrayToPushToThePlayer = [0,0]
             console.log("state.newPlayers-------", state.newPlayers[i].playerIndex)
             const playerToPushThePointsId =state.newPlayers[i].playerIndex
             const reducer = (previousValue, currentValue) => previousValue + currentValue;
             const pointReduced = pointsArrayToPushToThePlayer.reduce(reducer);
+            console.log("matchesFlateados!!!!!------!!!!", matchesFlateados)
+            console.log("players", state.newPlayers)
             for(let j=0; j < matchesFlateados.length; j++){
 
-                if(playerToPushThePointsId === matchesFlateados[i].members[0].playerIndex ){
+                if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
                     console.log("entro en el if")
                     pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
                     console.log("pointsArrayToPushToThePlayer", pointsArrayToPushToThePlayer)
@@ -168,19 +170,11 @@ console.log("state.matches",state.matches)
                    
                     console.log("pointReduced111------", pointReduced)
                 }
-                 state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-
-            //   console.log("pointReduced22222----", pointReduced)
-                // const pointToBePushed = matchesFlateados[i].points
-                // console.log("matchesFlateados.members name", matchesFlateados[i].members[0].playerIndex)
-                // console.log("matchesFlateados.members name", matchesFlateados[i].members[0].name)
-                // console.log("matchesFlateados.members name1", matchesFlateados[i].members[1].playerIndex)
-                // console.log("matchesFlateados.members name1", matchesFlateados[i].members[1].name)
-                // console.log("points to push", matchesFlateados[i].points)
-  
-                }
-                console.log("pointsArrayToPushToThePlayer", pointsArrayToPushToThePlayer)
             }
+                state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+                console.log("reducion de puntos!!!!!!-------", state.newPlayers[i].points)
+                console.log("pointsArrayToPushToThePlayer", pointsArrayToPushToThePlayer)
+        }
             console.log("state.newPlayers-------", state.newPlayers)
 
     //  const playersCopy = [...state.matches]
