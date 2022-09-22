@@ -136,10 +136,10 @@ console.log("state.matches",state.matches)
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
       matchScoringPoints.teams[0].points = points
-      console.log("steta.matches", state.matches)
+    //   console.log("steta.matches", state.matches)
 
       const player1and2Match = state.matches.find((match)=> match.id === payload.id)
-      console.log("player1and2Match", player1and2Match.teams[0].members[0].playerIndex)
+    //   console.log("player1and2Match", player1and2Match.teams[0].members[0].playerIndex)
       const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
       const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
       console.log("idPlayer1", idPlayer1)
@@ -147,14 +147,41 @@ console.log("state.matches",state.matches)
 
       /// iterar matchesFlateados e ir repartiendo lo valores a los jugadores desde aqui de alguna manera  
       // o iterar cada jugar y con su indexPlayer pedir que le metan el reduce de todos los puntos que le tocan iterando matches
-      const matchesFlateados = state.matches.map((match)=>  match.teams).flat()  //// estoy contiene los equipos y los puntos del equipo, muy clave***, o sea de aqui hay que iterar para para buscar los puntos de los inputs
+        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()  //// estoy contiene los equipos y los puntos del equipo, muy clave***, o sea de aqui hay que iterar para para buscar los puntos de los inputs
         console.log("matchesFlateados", matchesFlateados)
 
-      for(let i=0; i < matchesFlateados.length; i++){
-        console.log("matchesFlateados.members", matchesFlateados[i].members)
+        for(let i=0; i < state.newPlayers.length; i++){
+            const pointsArrayToPushToThePlayer = [0,0]
+            console.log("state.newPlayers-------", state.newPlayers[i].playerIndex)
+            const playerToPushThePointsId =state.newPlayers[i].playerIndex
+            const reducer = (previousValue, currentValue) => previousValue + currentValue;
+            const pointReduced = pointsArrayToPushToThePlayer.reduce(reducer);
+            for(let j=0; j < matchesFlateados.length; j++){
 
-          }
+                if(playerToPushThePointsId === matchesFlateados[i].members[0].playerIndex ){
+                    console.log("entro en el if")
+                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+                    console.log("pointsArrayToPushToThePlayer", pointsArrayToPushToThePlayer)
+                    console.log("matchesFlateados[i].points", matchesFlateados[j].points)
 
+                    // matchesFlateados[i].members[0].points.push(matchesFlateados[i].points)
+                   
+                    console.log("pointReduced111------", pointReduced)
+                }
+                 state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+
+            //   console.log("pointReduced22222----", pointReduced)
+                // const pointToBePushed = matchesFlateados[i].points
+                // console.log("matchesFlateados.members name", matchesFlateados[i].members[0].playerIndex)
+                // console.log("matchesFlateados.members name", matchesFlateados[i].members[0].name)
+                // console.log("matchesFlateados.members name1", matchesFlateados[i].members[1].playerIndex)
+                // console.log("matchesFlateados.members name1", matchesFlateados[i].members[1].name)
+                // console.log("points to push", matchesFlateados[i].points)
+  
+                }
+                console.log("pointsArrayToPushToThePlayer", pointsArrayToPushToThePlayer)
+            }
+            console.log("state.newPlayers-------", state.newPlayers)
 
     //  const playersCopy = [...state.matches]
     //   const teamsMappedFromMatches = [...state.matches]
