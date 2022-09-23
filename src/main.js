@@ -155,21 +155,14 @@ console.log("state.matches",state.matches)
                     pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
                     console.log("----------------", pointsArrayToPushToThePlayer)
                 }
+                if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+                    console.log("----------------", pointsArrayToPushToThePlayer)
+                }
             }
                 state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
         }
-        // for(let i=0; i < state.newPlayers.length; i++){
-        //     let pointsArrayToPushToThePlayer = [0,0]
-        //     const playerToPushThePointsId =state.newPlayers[i].playerIndex
-        //     const reducer = (previousValue, currentValue) => previousValue + currentValue;
-        //     for(let j=0; j < matchesFlateados.length; j++){
 
-        //         if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
-        //             pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-        //         }
-        //     }
-        //         state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-        // }
 
 
         
@@ -196,25 +189,12 @@ console.log("state.matches",state.matches)
                 if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
                         pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
                 }
-            }
-            state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-        }
-
-        for(let i=0; i < state.newPlayers.length; i++){
-            let pointsArrayToPushToThePlayer = [0,0]
-            const playerToPushThePointsId =state.newPlayers[i].playerIndex
-            const reducer = (previousValue, currentValue) => previousValue + currentValue;
-            for(let j=0; j < matchesFlateados.length; j++){
-    
                 if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
-                        pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-                }
+                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+            }
             }
             state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-        }
-    
-    
-            
+        }     
                 console.log("state.newPlayers-------", state.newPlayers)
     },
 
