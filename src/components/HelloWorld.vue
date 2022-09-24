@@ -1,36 +1,37 @@
 <template>
   <div class="hello">
          <h1>{{ msg }}</h1>
-
           <SportType></SportType>
-
-        <input type="text" v-model="typeOfGame" >
         <br>
         <hr>  
-          <input type="number" v-model="numberOfPlayers" >
-    
+        <NumberOfPlayers></NumberOfPlayers>
 
-    <div  class="playerInputsList">
+        <PlayerInputs></PlayerInputs>
+    
+<!-- componente lista de jugador con inputs -->
+    <!-- <div  class="playerInputsList">
       <button @click="addPlayers">Set players inputs
       </button>
        <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
         <p>player, index: {{index -1}}</p>
           <input type="text" placeholder="Player name" v-on:input="setNames($event, index)">
-           </li></div>
+           </li></div> -->
   
-  
+  <!-- componenete partidos -->
         <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList">
       <div class="matchCard"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore($event, match.id)"> <input type="text" v-on:input="setMatchScore2($event, match.id)"> </div></div>
       
         </li>
         <button @click="makeMatches" class="btn btn-primary">display matches</button>
-
+<!-- componente ranking -->
        <div class="rankingNames" v-for="(newPlayers, index) in $store.state.newPlayers" v-bind:key="index" ><h2>{{newPlayers.name}} ----- {{newPlayers.points}}</h2></div>
          </div>
 </template>
 
 <script>
 import SportType from "./SportType.vue";
+import NumberOfPlayers from "./NumberOfPlayers.vue";
+import PlayerInputs from "./PlayerInputs.vue";
 export default {
     name: "HelloWorld",
     props: {
@@ -38,22 +39,9 @@ export default {
     },
     data() {
         return {
-            numberOfPlayers: "",
-
         };
     },
-    watch: {
-        numberOfPlayers() {
-            console.log("entrando en el watch");
-            this.$store.commit("setNumberOfPlayers", this.numberOfPlayers);
-        },
-
-
-    },
     methods: {        
-      onInputScoreAlert(){ 
-         this.$store.commit("onInputScoreAlert");
-        },
         addPlayers() {
             this.$store.commit("addPlayers");
         },
@@ -76,7 +64,7 @@ export default {
           // console.log("id del match",id)
         },
     },
-    components: { SportType }
+    components: { SportType, NumberOfPlayers, PlayerInputs }
 }
 
 

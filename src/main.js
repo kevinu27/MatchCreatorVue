@@ -10,14 +10,18 @@ const store = createStore ({
         return {
             numberOfPlayers: 0,
             newPlayers: [],
-            typeOfGame: "pingPong",
-            matches: []
+            typeOfGame: "",
+            matches: [],
         }
     },
     mutations:{
         setNumberOfPlayers(state, payload){
             console.log(state)
             state.numberOfPlayers = payload
+        },
+
+        setTypeOfGame(state, payload){
+            state.typeOfGame= payload
 
         },
         addPlayers(state) {
