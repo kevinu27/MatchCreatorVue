@@ -1,16 +1,19 @@
 <template>
   <div class="hello">
          <h1>{{ msg }}</h1>
-          <SportType></SportType>
+         <!-- poner v-if y un estado que indique en que pagina estoy -->
+          <SportType></SportType> 
         <br>
         <hr>  
         <NumberOfPlayers></NumberOfPlayers>
         <PlayerInputs></PlayerInputs>
         <MatchesList></MatchesList>
+        <RankingList></RankingList>
 
 <!-- componente ranking -->
-       <div class="rankingNames" v-for="(newPlayers, index) in $store.state.newPlayers" v-bind:key="index" ><h2>{{newPlayers.name}} ----- {{newPlayers.points}}</h2></div>
-         </div>
+       <!-- <div class="rankingNames" v-for="(newPlayers, index) in $store.state.newPlayers" v-bind:key="index" ><h2>{{newPlayers.name}} ----- {{newPlayers.points}}</h2></div>-->
+         </div> 
+
 </template>
 
 <script>
@@ -18,6 +21,7 @@ import SportType from "./SportType.vue";
 import NumberOfPlayers from "./NumberOfPlayers.vue";
 import PlayerInputs from "./PlayerInputs.vue";
 import MatchesList from "./MatchesList.vue";
+import RankingList from "./RankingList.vue";
 export default {
     name: "HelloWorld",
     props: {
@@ -50,7 +54,7 @@ export default {
           // console.log("id del match",id)
         },
     },
-    components: { SportType, NumberOfPlayers, PlayerInputs, MatchesList }
+    components: { SportType, NumberOfPlayers, PlayerInputs, MatchesList, RankingList }
 }
 
 
