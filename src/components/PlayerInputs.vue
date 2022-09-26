@@ -1,14 +1,22 @@
-    <template>
+<template>
+        <div class="pLayerInput">
        <div  class="playerInputsList">
       <button @click="addPlayers">Set players inputs
       </button>
+
        <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
-        <p>player, index: {{index -1}}</p>
-          <input type="text" placeholder="Player name" v-on:input="setNames($event, index)">
-           </li></div>
-    </template>
+        <div class="inputLabel"> <p> Name {{index + 1}}</p><input type="text" placeholder="Player name" v-on:input="setNames($event, index)"></div>
+      <div class="inputLabel">  <p> skills</p> <input type="text" placeholder="Player skills" v-on:input="setSkills($event, index)"></div>
+           </li>
+        
+        </div> 
+        <div class="inputRange">
+        <input type="range">  </div>
+
+    </div>
+</template>
     
-    <script>
+<script>
     export default {
       name: 'PlayerInputs',
       data() {
@@ -23,26 +31,64 @@
         setNames(event, id) {
             this.$store.commit("setNames", { event: event, id: id });
         },
+        setSkills(event, id) {
+            this.$store.commit("setSkills", { event: event, id: id });
+        }
    
     },
       
 
       }
-    </script>
+</script>
     
-    <style scoped>
-   .playerInputRow{
+<style scoped>
+.inputLabel{
     display: flex;
     justify-content: center;
-    border: 2px solid blue;
+    /* border: 2px solid green; */
+    }
+
+.playerInputRow{
+    display: flex;
+    justify-content: space-between;
+    /* border: 2px solid blue; */
+    width: 100%;
+  }
+
+.playerInputRow li{
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid blue; */
+  }
+
+.playerInputRow p{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+.playerInputRow input{
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 
 .playerInputsList{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid red; */
+    width: 70%;
 }
 
-    </style>
+.pLayerInput{
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid red; */
+    position: relative;
+}
+
+.inputRange{
+    position: absolute;
+    top: 50% ;
+}
+</style>

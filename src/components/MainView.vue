@@ -9,9 +9,6 @@
         <PlayerInputs></PlayerInputs>
         <MatchesList></MatchesList>
         <RankingList></RankingList>
-
-<!-- componente ranking -->
-       <!-- <div class="rankingNames" v-for="(newPlayers, index) in $store.state.newPlayers" v-bind:key="index" ><h2>{{newPlayers.name}} ----- {{newPlayers.points}}</h2></div>-->
          </div> 
 
 </template>
@@ -23,12 +20,13 @@ import PlayerInputs from "./PlayerInputs.vue";
 import MatchesList from "./MatchesList.vue";
 import RankingList from "./RankingList.vue";
 export default {
-    name: "HelloWorld",
+    name: "MainView",
     props: {
         msg: String
     },
     data() {
         return {
+       
         };
     },
     methods: {        

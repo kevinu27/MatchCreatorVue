@@ -53,6 +53,10 @@ const store = createStore ({
             state.newPlayers[payload.id].name = payload.event.target.value
              console.log("this.newPlayers", state.newPlayers)
           },
+          setSkills(state, payload){
+            state.newPlayers[payload.id].skills = payload.event.target.value
+          },
+
     makeMatches(state){
     const teams = []
     for (let i = 0; i < state.newPlayers.length; i++) {
