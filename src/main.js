@@ -69,7 +69,7 @@ const store = createStore ({
             state.newPlayers[payload.id].skills = payload.event.target.value
           },
 
-    makeMatches(state){
+          makeMatches1vs1(state){
         const teams = []
         for (let i = 0; i < state.newPlayers.length; i++) {
           for (let j = 0; j < state.newPlayers.length; j++) {
@@ -149,6 +149,86 @@ state.matches= matches
 console.log("state.matches",state.matches)
   
     },
+    makeMatches2vs2(state){
+      const teams = []
+      for (let i = 0; i < state.newPlayers.length; i++) {
+        for (let j = 0; j < state.newPlayers.length; j++) {
+          if (i === j) {
+            continue;
+          }
+          const team = [state.newPlayers[j], state.newPlayers[i]];
+          teams.push(team);
+        }
+      }
+      for (let i = 0; i < teams.length; i++) {
+          const player1 = teams[i][0];
+          const player2 = teams[i][1];
+///mirar si es necesario o lo puedo quitar/////////////////////////////////////////////////////////////////////
+          for (let j = 0; j < teams.length; j++) {
+              if (i === j) {
+              continue;
+              }
+              if (player1 === teams[j][1] && player2 === teams[j][0]) {
+                  if (i < j) {
+                    teams.splice(j, 1);
+                  }
+              break;
+              }
+            }
+          }
+/////////////////
+      const matches = [];
+      for (let i = 0; i < teams.length; i++) {
+          for (let j = 0; j < teams.length; j++) {
+              if (i === j) {
+                  continue;
+              }
+const matchTeams = [
+  { members: teams[j], points: 0 },
+  { members: teams[i], points: 0 },
+];
+matches.push({
+  teams: matchTeams,
+  id: `${i}${j}`,
+});
+}
+}
+for (let i = 0; i < matches.length; i++) {
+const element1 = matches[i].teams[0].members[0];
+const element2 = matches[i].teams[0].members[1];
+
+if (
+element1 === matches[i].teams[1].members[1] ||
+element1 === matches[i].teams[1].members[0] ||
+element2 === matches[i].teams[1].members[0] ||
+element2 === matches[i].teams[1].members[1]
+) {
+matches.splice(i, 1);
+i = i - 1;
+}
+}
+for (let i = 0; i < matches.length; i++) {
+const player1 = matches[i].teams[0].members[0].name;
+const player2 = matches[i].teams[0].members[1].name;
+for (let j = 0; j < matches.length; j++) {
+if (i === j) {
+  continue;
+}
+if (
+  player1 === matches[j].teams[1].members[0].name &&
+  player2 === matches[j].teams[1].members[1].name
+) {
+  matches.splice(j, 1);
+  j = j - 1;
+  break;
+}
+}
+}
+console.log("matches final", matches)
+state.matches= matches
+console.log("state.matches",state.matches)
+
+  },
     setMatchScore(state, payload){
       //////////
       const points = parseInt(payload.event.target.value)

@@ -4,10 +4,10 @@
       
   </li>
   <div v-if="$store.state.selectedMatchVS === '1vs1'">
-    <button @click="makeMatches" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
+    <button @click="makeMatches1vs1" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
   </div>
   <div v-if="$store.state.selectedMatchVS === '2vs2'">
-    <button @click="makeMatches" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
+    <button @click="makeMatches2vs2" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
   </div>
 </template>
 
@@ -20,8 +20,11 @@ export default {
         };
     },
     methods: {        
-        makeMatches() {
-            this.$store.commit("makeMatches");
+        makeMatches1vs1() {
+            this.$store.commit("makeMatches1vs1");
+        },
+        makeMatches2vs2() {
+            this.$store.commit("makeMatches2vs2");
         },
         setMatchScore(event, id){
           this.$store.commit("setMatchScore", { event: event, id: id });
