@@ -2,9 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import {createStore} from 'vuex'
 
-
-
-
 const store = createStore ({
     state(){
         return {
@@ -12,9 +9,20 @@ const store = createStore ({
             newPlayers: [],
             typeOfGame: "",
             matches: [],
+            currentPage: 0
         }
     },
+
     mutations:{
+
+      pageForward(state){
+        state.currentPage += 1
+        console.log("state.currentPage", state.currentPage)
+      },
+      pageBackward(state){
+        state.currentPage -= 1
+        console.log("state.currentPage", state.currentPage)
+      },
         setNumberOfPlayers(state, payload){
             console.log(state)
             state.numberOfPlayers = payload
@@ -40,11 +48,11 @@ const store = createStore ({
             state.newPlayers.push(newPlayer);
             console.log(newPlayer.playerIndex, "index")
             }
-  
- 
-    console.log("state.newPlayers", state.newPlayers)
-    return newPlayers;
+
+            console.log("state.newPlayers", state.newPlayers)
+             return newPlayers;
         },
+
         setNames(state, payload){
             console.log(state)
             console.log("id", payload.id)
@@ -58,39 +66,39 @@ const store = createStore ({
           },
 
     makeMatches(state){
-    const teams = []
-    for (let i = 0; i < state.newPlayers.length; i++) {
-      for (let j = 0; j < state.newPlayers.length; j++) {
-        if (i === j) {
-          continue;
+        const teams = []
+        for (let i = 0; i < state.newPlayers.length; i++) {
+          for (let j = 0; j < state.newPlayers.length; j++) {
+            if (i === j) {
+              continue;
+            }
+            const team = [state.newPlayers[j], state.newPlayers[i]];
+            teams.push(team);
           }
-          const team = [state.newPlayers[j], state.newPlayers[i]];
-          teams.push(team);
-           }
-                }
-for (let i = 0; i < teams.length; i++) {
-const player1 = teams[i][0];
-const player2 = teams[i][1];
+        }
+        for (let i = 0; i < teams.length; i++) {
+            const player1 = teams[i][0];
+            const player2 = teams[i][1];
 ///mirar si es necesario o lo puedo quitar/////////////////////////////////////////////////////////////////////
-for (let j = 0; j < teams.length; j++) {
-  if (i === j) {
-    continue;
-  }
-  if (player1 === teams[j][1] && player2 === teams[j][0]) {
-    if (i < j) {
-      teams.splice(j, 1);
-    }
-    break;
-  }
-}
-}
+            for (let j = 0; j < teams.length; j++) {
+                if (i === j) {
+                continue;
+                }
+                if (player1 === teams[j][1] && player2 === teams[j][0]) {
+                    if (i < j) {
+                      teams.splice(j, 1);
+                    }
+                break;
+                }
+              }
+            }
 /////////////////
-const matches = [];
-for (let i = 0; i < teams.length; i++) {
-for (let j = 0; j < teams.length; j++) {
-  if (i === j) {
-    continue;
-  }
+        const matches = [];
+        for (let i = 0; i < teams.length; i++) {
+            for (let j = 0; j < teams.length; j++) {
+                if (i === j) {
+                    continue;
+                }
   const matchTeams = [
     { members: teams[j], points: 0 },
     { members: teams[i], points: 0 },

@@ -3,7 +3,7 @@
       <div class="matchCard"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore($event, match.id)"> <input type="text" v-on:input="setMatchScore2($event, match.id)"> </div></div>
       
         </li>
-        <button @click="makeMatches" class="btn btn-primary">display matches</button>
+        <button @click="makeMatches" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
 </template>
 
 <script>

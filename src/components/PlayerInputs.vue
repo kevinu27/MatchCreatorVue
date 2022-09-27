@@ -11,7 +11,8 @@
         
         </div> 
         <div class="inputRange">
-        <input type="range">  </div>
+        <input type="range" min="0" max="10" steps="1" v-on:input="getSlider" v-if="$store.state.currentPage > 0">  
+    </div>
 
     </div>
 </template>
@@ -27,14 +28,18 @@
         methods: {        
         addPlayers() {
             this.$store.commit("addPlayers");
+            this.$store.commit("pageForward");
         },
         setNames(event, id) {
             this.$store.commit("setNames", { event: event, id: id });
         },
         setSkills(event, id) {
             this.$store.commit("setSkills", { event: event, id: id });
-        }
-   
+        },
+        getSlider(event){
+            console.log("Slider Value", event.target.value)
+        },
+        
     },
       
 
