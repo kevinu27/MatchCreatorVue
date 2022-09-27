@@ -9,7 +9,8 @@ const store = createStore ({
             newPlayers: [],
             typeOfGame: "",
             matches: [],
-            currentPage: 0
+            currentPage: 0,
+            selectedMatchVS: ""
         }
     },
 
@@ -22,6 +23,9 @@ const store = createStore ({
       pageBackward(state){
         state.currentPage -= 1
         console.log("state.currentPage", state.currentPage)
+      },
+      selected(state, payload){
+        state.selectedMatchVS = payload
       },
         setNumberOfPlayers(state, payload){
             console.log(state)

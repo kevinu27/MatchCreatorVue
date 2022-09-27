@@ -1,9 +1,14 @@
 <template>
-   <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList">
-      <div class="matchCard"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore($event, match.id)"> <input type="text" v-on:input="setMatchScore2($event, match.id)"> </div></div>
+  <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList">
+    <div class="matchCard"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore($event, match.id)"> <input type="text" v-on:input="setMatchScore2($event, match.id)"> </div></div>
       
-        </li>
-        <button @click="makeMatches" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
+  </li>
+  <div v-if="$store.state.selectedMatchVS === '1vs1'">
+    <button @click="makeMatches" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
+  </div>
+  <div v-if="$store.state.selectedMatchVS === '2vs2'">
+    <button @click="makeMatches" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
+  </div>
 </template>
 
 <script>
