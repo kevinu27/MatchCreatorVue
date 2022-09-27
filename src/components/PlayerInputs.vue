@@ -1,8 +1,7 @@
 <template>
         <div class="pLayerInput">
        <div  class="playerInputsList">
-      <button @click="addPlayers">Set players inputs
-      </button>
+     
 
        <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
         <div class="inputLabel"> <p> Name {{index + 1}}</p><input type="text" placeholder="Player name" v-on:input="setNames($event, index)"></div>
