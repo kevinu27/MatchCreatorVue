@@ -180,7 +180,7 @@ state.matches= matches
 console.log("state.matches",state.matches)
 
   },
-    setMatchScore(state, payload){
+    setMatchScore_2vs2(state, payload){
       //////////
       const points = parseInt(payload.event.target.value)
       // const id= parseInt(payload.id)
@@ -219,7 +219,7 @@ console.log("state.matches",state.matches)
         
             console.log("state.newPlayers-------", state.newPlayers)
     },
-    setMatchScore2(state, payload){
+    setMatchScore2_2vs2(state, payload){
         const points = parseInt(payload.event.target.value)
         const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
         matchScoringPoints.teams[1].points = points

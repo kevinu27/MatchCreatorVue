@@ -39,14 +39,14 @@ export default {
         makeMatches() {
             this.$store.commit("makeMatches");
         },
-        setMatchScore(event, id){
-          this.$store.commit("setMatchScore", { event: event, id: id });
+        setMatchScore_2vs2(event, id){
+          this.$store.commit("setMatchScore_2vs2", { event: event, id: id });
        
 
           // console.log("id del match",id)
         },
-        setMatchScore2(event, id){
-          this.$store.commit("setMatchScore2", { event: event, id: id });
+        setMatchScore2_2vs2(event, id){
+          this.$store.commit("setMatchScore2_2vs2", { event: event, id: id });
         
 
           // console.log("id del match",id)
