@@ -97,7 +97,16 @@ const store = createStore ({
             }
           }
        console.log("MATCHES------------------!!!!!!!!!!!!!!!", matches)
-       state.matches = matches
+       const final1vs1Matches = []
+       for (let i = 0; i < matches.length; i++) {
+        final1vs1Matches.push({players: matches[i], matchId: `${matches[i][0].playerIndex} ${matches[i][1].playerIndex}`})       
+        // console.log("matches[i][0].playerIndex", matches[i][0].playerIndex)
+        // console.log("playerIndex!!!!!",  `${matches[i][0].playerIndex} ${matches[i][1].playerIndex}`)
+       }
+
+       console.log("----!!!final1vs1Matches!!!!!!!!------", final1vs1Matches)
+        state.matches = final1vs1Matches
+        console.log("STATEEEEEEEEEE",  state.matches )
     },
     
     makeMatches2vs2(state){
@@ -177,7 +186,7 @@ if (
 }
 console.log("matches final", matches)
 state.matches= matches
-console.log("state.matches",state.matches)
+console.log("state.matches", state.matches)
 
   },
     setMatchScore_2vs2(state, payload){
@@ -247,6 +256,80 @@ console.log("state.matches",state.matches)
             state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
         }     
                 console.log("state.newPlayers-------", state.newPlayers)
+    },
+    setMatchScore_1vs1(state, payload){
+      console.log("state", state)
+      console.log("payload", payload)
+
+      //////////
+      const points = parseInt(payload.event.target.value)
+      // const id= parseInt(payload.id)
+      const stateMatchesCopy = [...state.matches]
+      const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
+      matchScoringPoints.teams[0].points = points
+    //   console.log("steta.matches", state.matches)
+
+      const player1and2Match = state.matches.find((match)=> match.id === payload.id)
+    //   console.log("player1and2Match", player1and2Match.teams[0].members[0].playerIndex)
+      const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
+      const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
+      console.log("idPlayer1", idPlayer1)
+      console.log("idPlayer2", idPlayer2)
+        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
+
+        for(let i=0; i < state.newPlayers.length; i++){
+            let pointsArrayToPushToThePlayer = [0,0]
+            const playerToPushThePointsId =state.newPlayers[i].playerIndex
+            const reducer = (previousValue, currentValue) => previousValue + currentValue;
+            for(let j=0; j < matchesFlateados.length; j++){
+                if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
+                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+                    console.log("----------------", pointsArrayToPushToThePlayer)
+                }
+                if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+                    console.log("----------------", pointsArrayToPushToThePlayer)
+                }
+            }
+                state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+        }
+
+
+
+        
+            
+    },
+    setMatchScore2_1vs1(state, payload){
+      console.log("-------------------")
+      console.log("state", state)
+      console.log("payload", payload)
+        // const points = parseInt(payload.event.target.value)
+        // const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
+        // matchScoringPoints.teams[1].points = points
+
+        // const player1and2Match = state.matches.find((match)=> match.id === payload.id)
+        // const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
+        // const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
+        // console.log("idPlayer1", idPlayer1)
+        // console.log("idPlayer2", idPlayer2)
+        // const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
+    
+        // for(let i=0; i < state.newPlayers.length; i++){
+        //     let pointsArrayToPushToThePlayer = [0,0]
+        //     const playerToPushThePointsId =state.newPlayers[i].playerIndex
+        //     const reducer = (previousValue, currentValue) => previousValue + currentValue;
+        //     for(let j=0; j < matchesFlateados.length; j++){
+    
+        //         if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
+        //                 pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+        //         }
+        //         if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+        //             pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+        //     }
+        //     }
+        //     state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+        // }     
+        //         console.log("state.newPlayers-------", state.newPlayers)
     },
 
 }

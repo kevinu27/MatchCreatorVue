@@ -1,7 +1,7 @@
 <template>
   <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList" >
     <div class="matchCard" v-if="$store.state.selectedMatchVS === '2vs2'"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore_2vs2($event, match.id)"> <input type="text" v-on:input="setMatchScore2_2vs2($event, match.id)"> </div></div>
-    <div class="matchCard" v-if="$store.state.selectedMatchVS === '1vs1'"> <p>{{match[0].name }} <span> VS</span>  {{match[1].name}} </p> <div class="inputScore"><input type="text" v-on:input="setMatchScore_2vs2($event, match.id)"> <input type="text" v-on:input="setMatchScore2_2vs2($event, match.id)"> </div></div>
+    <div class="matchCard" v-if="$store.state.selectedMatchVS === '1vs1'"> <p>{{match.players[0].name }} <span> VS</span>  {{match.players[1].name }} </p> <div class="inputScore"><input type="text" v-on:input="setMatchScore_1vs1($event, match.id)"> <p>1v1*</p><input type="text" v-on:input="setMatchScore2_1vs1($event, match.id)"> </div></div>
   </li>
   <div v-if="$store.state.selectedMatchVS === '1vs1'">
     <button @click="makeMatches1vs1" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
@@ -31,6 +31,13 @@ export default {
         },
         setMatchScore2_2vs2(event, id){
           this.$store.commit("setMatchScore2_2vs2", { event: event, id: id });
+
+        },
+        setMatchScore_1vs1(event, id){
+          this.$store.commit("setMatchScore_1vs1", { event: event, id: id });
+        },
+        setMatchScore2_1vs1(event, id){
+          this.$store.commit("setMatchScore2_1vs1", { event: event, id: id });
 
         },
     },

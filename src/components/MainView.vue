@@ -30,33 +30,12 @@ export default {
         };
     },
     methods: {        
-        addPlayers() {
-            this.$store.commit("addPlayers");
-        },
-        setNames(event, id) {
-            this.$store.commit("setNames", { event: event, id: id });
-        },
-        makeMatches() {
-            this.$store.commit("makeMatches");
-        },
-        setMatchScore_2vs2(event, id){
-          this.$store.commit("setMatchScore_2vs2", { event: event, id: id });
-       
 
-          // console.log("id del match",id)
-        },
-        setMatchScore2_2vs2(event, id){
-          this.$store.commit("setMatchScore2_2vs2", { event: event, id: id });
-        
-
-          // console.log("id del match",id)
-        },
     },
     components: { SportType, NumberOfPlayers, PlayerInputs, MatchesList, RankingList }
 }
-
-
 </script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .rankingNames{
