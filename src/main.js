@@ -80,10 +80,26 @@ const store = createStore ({
             matches.push(match);
           }
         }
-        console.log("MATCHES------------------!!!!!!!!!!!!!!!", matches)
-       
-  
+   
+        for (let i = 0; i < matches.length; i++) {
+          const player1 = matches[i][0];
+          const player2 = matches[i][1];
+          for (let j = 0; j < matches.length; j++) {
+              if (i === j) {
+              continue;
+              }
+              if (player1 === matches[j][1] && player2 === matches[j][0]) {
+                  if (i < j) {
+                    matches.splice(j, 1);
+                  }
+              break;
+              }
+            }
+          }
+       console.log("MATCHES------------------!!!!!!!!!!!!!!!", matches)
+       state.matches = matches
     },
+    
     makeMatches2vs2(state){
       const teams = []
       for (let i = 0; i < state.newPlayers.length; i++) {
