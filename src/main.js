@@ -96,6 +96,8 @@ const store = createStore ({
                   }
                 }
               }
+
+              //// esto se puede refactorizar
               const newMatches = []
               const newMatches2 = [] 
               const newMatches3 = [] 
@@ -103,11 +105,9 @@ const store = createStore ({
                  newMatches[i] = [{ members : matches[i][0] }, { members : matches[i][1] } ]
               }
               for(let i = 0; i < newMatches.length; i++){
-                newMatches2[i] = {teams:  [{ members :[ matches[i][0]] }, { members :[ matches[i][1]] } ], id:`${newMatches[i][0].members.playerIndex}${i}` }, {teams:  [{ members : [matches[i][0]] }, { members : [matches[i][1]] } ], id: `${newMatches[i][1].members.playerIndex}${i}` }
+                newMatches2[i] = {teams:  [{ members :[ matches[i][0]], points: 0 }, { members :[ matches[i][1]], points: 0 } ], matchId:`${newMatches[i][0].members.playerIndex}${i}` }, {teams:  [{ members : [matches[i][0]], points: 0 }, { members : [matches[i][1]], points: 0 } ], matchId: `${newMatches[i][1].members.playerIndex}${i}` }
              }
-             for(let i = 0; i < newMatches2.length; i++){
-              newMatches3[i] = newMatches2[i]
-           }
+     
 
 
 
@@ -265,45 +265,47 @@ console.log("state.matches", state.matches)
                 console.log("state.newPlayers-------", state.newPlayers)
     },
     setMatchScore_1vs1(state, payload){
-        //////////
-        const points = parseInt(payload.event.target.value)
-        // const id= parseInt(payload.id)
-        const stateMatchesCopy = [...state.matches]
-        const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
-        matchScoringPoints.teams[0].points = points
-      //   console.log("steta.matches", state.matches)
-  
-        const player1and2Match = state.matches.find((match)=> match.id === payload.id)
-      //   console.log("player1and2Match", player1and2Match.teams[0].members[0].playerIndex)
-        const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
-        const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
-        console.log("idPlayer1", idPlayer1)
-        console.log("idPlayer2", idPlayer2)
-          const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
-  
-          for(let i=0; i < state.newPlayers.length; i++){
-              let pointsArrayToPushToThePlayer = [0,0]
-              const playerToPushThePointsId =state.newPlayers[i].playerIndex
-              const reducer = (previousValue, currentValue) => previousValue + currentValue;
-              for(let j=0; j < matchesFlateados.length; j++){
-                  if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
-                      pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-                      console.log("----------------", pointsArrayToPushToThePlayer)
-                  }
-                  if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
-                      pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-                      console.log("----------------", pointsArrayToPushToThePlayer)
-                  }
-              }
-                  state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-          }
-  
-  
-  
-          
-              console.log("state.newPlayers-------", state.newPlayers)
+         //////////
+         const points = parseInt(payload.event.target.value)
+         // const id= parseInt(payload.id)
+         const stateMatchesCopy = [...state.matches]
+         const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
+        // console.log("matchScoringPointsmatchScoringPoints", matchScoringPoints)
+         matchScoringPoints.teams[0].points = points
+         console.log("state.matches----------!!!!!!!!!", state.matches)
 
+         const player1and2Match = state.matches.find((match)=> match.matchId === payload.id)
+        //  console.log("player1and2Match----------", player1and2Match)
+         const idPlayer1 =player1and2Match.teams[0].members[0].playerIndex
+        //  const idPlayer2 =player1and2Match.teams[0].members[1].playerIndex
+        //  console.log("idPlayer1", idPlayer1)
+        //  console.log("idPlayer2", idPlayer2)
+          //  const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
+  //  console.log("matchesFlateados", matchesFlateados)
+  // console.log("state.matches----------!!!!!!!!!", state.matches)
 
+           for(let i=0; i < state.newPlayers.length; i++){
+               let pointsArrayToPushToThePlayer = [0,0]
+               const playerToPushThePointsId =state.newPlayers[i].playerIndex
+               const reducer = (previousValue, currentValue) => previousValue + currentValue;
+               for(let j=0; j < state.matches.length; j++){
+                // console.log(" state.matches[j].teams[0].members[0].playerIndex", state.matches[j].teams[0].members[0].playerIndex)
+                // console.log("playerToPushThePointsId------!!!!!!!", playerToPushThePointsId)
+                   if(playerToPushThePointsId === state.matches[j].teams[0].members[0].playerIndex ){
+                     console.log("state.matches[j].teams[0].members[0].points", state.matches[j].teams[0].points)
+                     const pointToPush = state.matches[j].teams[0].points
+                       pointsArrayToPushToThePlayer.push(pointToPush)
+                       console.log("----------------", pointsArrayToPushToThePlayer)
+                   }
+                  //  if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+                  //      pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+                  //      console.log("----------------", pointsArrayToPushToThePlayer)
+                  //  }
+               }
+                   state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+           }
+
+               console.log("state.newPlayers-------", state.newPlayers)
 
         
             
