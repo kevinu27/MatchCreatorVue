@@ -247,7 +247,7 @@ const store = createStore ({
          const stateMatchesCopy = [...state.matches]
          const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
          matchScoringPoints.teams[0].points = points
-         
+
            for(let i=0; i < state.newPlayers.length; i++){
                let pointsArrayToPushToThePlayer = [0,0]
                const playerToPushThePointsId =state.newPlayers[i].playerIndex
@@ -301,6 +301,7 @@ const store = createStore ({
           return b.points - a.points;
         });
        state.newPlayers = sortedPlayers
+
     },
 
 }
