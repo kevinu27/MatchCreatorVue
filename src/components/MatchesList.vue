@@ -46,6 +46,18 @@ export default {
 </script>
 
 <style scoped>
+  button{
+    
+    margin-top: 1rem;
+   border-style: none;
+   height: 3rem;
+   border-radius: 3px;
+   padding-left: 2rem;
+   padding-right: 2rem;
+   margin-bottom: 1rem;
+   font-weight: bold;
+
+  }
 
 .inputScore{
   display: flex;

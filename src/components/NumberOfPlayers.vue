@@ -44,5 +44,24 @@ export default {
     flex-direction: column;
     align-items: center;
 }
+.buttonInput input{
+    height: 1.8rem;
+    margin-bottom: 1rem;
+}
+.buttonInput button{
+    font-weight: bold;
+    margin-bottom: 1rem;
+   border-style: none;
+   height: 3rem;
+   border-radius: 3px;
+   padding-left: 2rem;
+   padding-right: 2rem;
+   margin-bottom: 1rem;
+}
+
+select{
+    height: 2rem;
+    margin-bottom: 1rem;
+}
 
 </style>

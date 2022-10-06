@@ -52,14 +52,9 @@ const store = createStore ({
                 points: 0,
                 }
             state.newPlayers.push(newPlayer);
-
             }
-
-
              return newPlayers;
         },
-
-
         setNames(state, payload){
             state.newPlayers[payload.id].name = payload.event.target.value
           },
