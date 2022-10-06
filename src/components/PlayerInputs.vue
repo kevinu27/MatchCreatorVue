@@ -10,7 +10,7 @@
         
         </div> 
         <div class="inputRange" v-if="$store.state.selectedMatchVS === '2vs2'">
-        <input type="range" min="0" max="10" steps="1" value= "0" v-on:input="getSlider" v-if="$store.state.currentPage > 0">  
+        <input type="range" min="0" max="10" steps="1" value= "10" v-on:input="getSlider" v-if="$store.state.currentPage > 0">  
     </div>
 
     </div>

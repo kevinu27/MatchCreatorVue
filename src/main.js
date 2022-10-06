@@ -67,9 +67,14 @@ const store = createStore ({
             state.newPlayers[payload.id].skills = payload.event.target.value
           },
           filterBySkills(state, payload){
-            console.log("Slider Value", payload.target.value)
             state.skillsFilter =  payload.target.value
-            console.log(state)
+            console.log("slidervalue",  payload.target.value)
+            const matchesFilteredBySkills = state.matches.filter(match => Math.abs(Math.abs(match.teams[0].members[0].skills + match.teams[0].members[1].skills) - Math.abs(match.teams[1].members[0].skills + match.teams[1].members[1].skills)) <  state.skillsFilter)
+            console.log("matchesFilteredBySkills", matchesFilteredBySkills)
+            console.log("state.matches", state.matches)
+
+            state.matches = matchesFilteredBySkills
+
           },
 
           makeMatches1vs1(state){
