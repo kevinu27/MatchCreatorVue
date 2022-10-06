@@ -11,7 +11,8 @@ const store = createStore ({
             typeOfGame: "",
             matches: [],
             currentPage: 0,
-            selectedMatchVS: ""
+            selectedMatchVS: "",
+            skillsFilter: 0
         }
         
 
@@ -64,6 +65,11 @@ const store = createStore ({
           },
           setSkills(state, payload){
             state.newPlayers[payload.id].skills = payload.event.target.value
+          },
+          filterBySkills(state, payload){
+            console.log("Slider Value", payload.target.value)
+            state.skillsFilter =  payload.target.value
+            console.log(state)
           },
 
           makeMatches1vs1(state){

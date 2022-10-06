@@ -9,8 +9,8 @@
            </li>
         
         </div> 
-        <div class="inputRange">
-        <input type="range" min="0" max="10" steps="1" v-on:input="getSlider" v-if="$store.state.currentPage > 0">  
+        <div class="inputRange" v-if="$store.state.selectedMatchVS === '2vs2'">
+        <input type="range" min="0" max="10" steps="1" value= "0" v-on:input="getSlider" v-if="$store.state.currentPage > 0">  
     </div>
 
     </div>
@@ -36,7 +36,8 @@
             this.$store.commit("setSkills", { event: event, id: id });
         },
         getSlider(event){
-            console.log("Slider Value", event.target.value)
+            // console.log("Slider Value", event.target.value)
+            this.$store.commit("filterBySkills", event);
         },
         
     },
