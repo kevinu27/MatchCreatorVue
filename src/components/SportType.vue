@@ -1,7 +1,9 @@
-rgb(226, 230, 234)<template>
-    <h4>What are you going to play?</h4>
-<h4>{{$store.state.typeOfGame}}</h4>
-<input type="text" v-model="typeOfGame" >
+<template>
+    <div>
+        <h4>What are you going to play?</h4>
+        <h4>{{$store.state.typeOfGame}}</h4>
+        <input type="text" v-model="typeOfGame" >
+    </div>
 </template>
 
 <script>

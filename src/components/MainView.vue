@@ -9,7 +9,7 @@
         <PlayerInputs></PlayerInputs>
         <MatchesList></MatchesList>
         <RankingList></RankingList>
-         </div> 
+  </div> 
 
 </template>
 
@@ -38,15 +38,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.rankingNames{
-  display: flex;
-  flex-direction: column;
-}
-.rankingNames h2{
-border: 2px solid red;
-margin: 0px;
-margin-top: 1.5rem;
-}
+
 
 
 .inputScore{
