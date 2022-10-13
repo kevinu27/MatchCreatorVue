@@ -1,30 +1,24 @@
 <template>
   <div>
     <NavBar></NavBar>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <div class="container">
-  <div class="trophy">
-    <div class="cup"> <p> 1 </p> </div>
-    <div class="lefthand"></div>
-    <div class="righthand"></div>
-    <div class="stand"></div>
-    <div class="base"></div>
-  </div>
-</div>
-  <MainView msg="Welcome to Match Creator"/>
+    <MainView></MainView>
+
+
+
 </div>
 </template>
 
 <script>
-import MainView from './components/MainView.vue'
+
 import NavBar from './components/NavBar.vue'
+import MainView from './components/MainView.vue';
 
 
 export default {
   name: 'App',
   components: {
-    MainView,
     NavBar,
+    MainView
 }
 }
 </script>

@@ -1,9 +1,20 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import {createStore} from 'vuex'
+import {createRouter, createWebHistory} from 'vue-router'
+import UserProfile from './components/UserProfile.vue'
+import MainGame from './components/MainGame.vue'
+
+const router = createRouter({
+history: createWebHistory(),
+  routes: [
+    {path: '/game', component: MainGame},
+   {path: '/profile', component: UserProfile}  // distintas rutas
+    // {path: '/profile', component: UserProfile},
+  ]
+})
 
 const store = createStore ({
-  
     state(){
         return {
             numberOfPlayers: 0,
@@ -13,14 +24,10 @@ const store = createStore ({
             currentPage: 0,
             selectedMatchVS: "",
             skillsFilter: 0
-        }
-        
-
+        }     
     },
   
-
     mutations:{
-
       pageForward(state){
         state.currentPage += 1
         console.log("state.currentPage", state.currentPage)
@@ -195,7 +202,13 @@ const store = createStore ({
 
   },
     setMatchScore_2vs2(state, payload){
-      const points = parseInt(payload.event.target.value)
+      let points = parseInt(payload.event.target.value)
+      for(let i = 0; i < payload.event.target.value.length; i++ ){
+if (isNaN( payload.event.target.value[i])) {
+console.log("not a number")
+points = 0
+}
+      }
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
       matchScoringPoints.teams[0].points = points
@@ -224,7 +237,13 @@ const store = createStore ({
     },
 
     setMatchScore2_2vs2(state, payload){
-        const points = parseInt(payload.event.target.value)
+      let points = parseInt(payload.event.target.value)
+      for(let i = 0; i < payload.event.target.value.length; i++ ){
+if (isNaN( payload.event.target.value[i])) {
+console.log("not a number")
+points = 0
+}
+      }
         const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
         matchScoringPoints.teams[1].points = points
         const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
@@ -249,7 +268,15 @@ const store = createStore ({
        state.newPlayers = sortedPlayers  
     },
     setMatchScore_1vs1(state, payload){
-         const points = parseInt(payload.event.target.value)
+
+         let points = parseInt(payload.event.target.value)
+         for(let i = 0; i < payload.event.target.value.length; i++ ){
+if (isNaN( payload.event.target.value[i])) {
+  console.log("not a number")
+points = 0
+}
+         }
+     
          const stateMatchesCopy = [...state.matches]
          const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
          matchScoringPoints.teams[0].points = points
@@ -280,7 +307,13 @@ const store = createStore ({
             
     },
     setMatchScore2_1vs1(state, payload){
-      const points = parseInt(payload.event.target.value)
+      let points = parseInt(payload.event.target.value)
+      for(let i = 0; i < payload.event.target.value.length; i++ ){
+if (isNaN( payload.event.target.value[i])) {
+console.log("not a number")
+points = 0
+}
+      }
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
       matchScoringPoints.teams[1].points = points
@@ -317,6 +350,7 @@ console.log(store)
 
 const app = createApp(App)
 app.use(store)
+app.use(router)
 app.mount('#app')
 
 // createApp(App).use(store)
