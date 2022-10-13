@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
          <h1>{{ msg }}</h1>
+  
          <!-- poner v-if y un estado que indique en que pagina estoy -->
+    
           <SportType></SportType> 
         <br>
         <hr>  
@@ -19,6 +21,7 @@ import NumberOfPlayers from "./NumberOfPlayers.vue";
 import PlayerInputs from "./PlayerInputs.vue";
 import MatchesList from "./MatchesList.vue";
 import RankingList from "./RankingList.vue";
+
 export default {
     name: "MainView",
     props: {
@@ -118,4 +121,6 @@ li {
 a {
   color: #42b983;
 }
+
+
 </style>

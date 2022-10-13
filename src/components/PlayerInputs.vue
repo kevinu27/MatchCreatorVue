@@ -1,6 +1,6 @@
 <template>
     <div class="pLayerInput">
-        <div  class="playerInputsList">
+        <div  class="playerInputsList" v-if="$store.state.currentPage>0">
             <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
                 <div class="inputs"> <input type="text" placeholder="Player name" v-on:input="setNames($event, index)"></div>
                 <div class="inputs">   <input type="text" placeholder="Player skills" v-on:input="setSkills($event, index)"></div>
