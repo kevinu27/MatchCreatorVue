@@ -9,7 +9,7 @@
                 <div class="dropdown">
                   <li><router-link to="/profile"> User</router-link></li>
                   <div class="dropdown-content">
-                    <a href="#">Profile</a>
+                    <router-link to="/profile">Profile</router-link>
                     <a href="#">login</a>
                     <a href="#">register</a>
                     <a href="#">logout</a>

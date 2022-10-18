@@ -32,8 +32,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 Todo:
 1- ramdomizar la lista de partidos
-2- dropdown del usuario
 3- actions
 4- getter
 5- mutation.js, getters.js, action.js
-6
+6-
