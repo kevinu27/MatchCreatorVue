@@ -1,9 +1,8 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <MainView></MainView>
-
-
+    <router-view>
+    </router-view>
 
 </div>
 </template>
@@ -11,14 +10,14 @@
 <script>
 
 import NavBar from './components/NavBar.vue'
-import MainView from './components/MainView.vue';
+// import MainView from './components/MainView.vue';
 
 
 export default {
   name: 'App',
   components: {
     NavBar,
-    MainView
+    // MainView
 }
 }
 </script>

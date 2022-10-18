@@ -8,7 +8,7 @@ import MainGame from './components/MainGame.vue'
 const router = createRouter({
 history: createWebHistory(),
   routes: [
-    {path: '/game', component: MainGame},
+    {path: '/', component: MainGame},
    {path: '/profile', component: UserProfile}  // distintas rutas
     // {path: '/profile', component: UserProfile},
   ]
@@ -204,10 +204,10 @@ const store = createStore ({
     setMatchScore_2vs2(state, payload){
       let points = parseInt(payload.event.target.value)
       for(let i = 0; i < payload.event.target.value.length; i++ ){
-if (isNaN( payload.event.target.value[i])) {
-console.log("not a number")
-points = 0
-}
+        if (isNaN( payload.event.target.value[i])) {
+          console.log("not a number")
+          points = 0
+        }
       }
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
@@ -239,10 +239,10 @@ points = 0
     setMatchScore2_2vs2(state, payload){
       let points = parseInt(payload.event.target.value)
       for(let i = 0; i < payload.event.target.value.length; i++ ){
-if (isNaN( payload.event.target.value[i])) {
-console.log("not a number")
-points = 0
-}
+        if (isNaN( payload.event.target.value[i])) {
+          console.log("not a number")
+          points = 0
+        }
       }
         const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
         matchScoringPoints.teams[1].points = points
@@ -269,12 +269,12 @@ points = 0
     },
     setMatchScore_1vs1(state, payload){
 
-         let points = parseInt(payload.event.target.value)
-         for(let i = 0; i < payload.event.target.value.length; i++ ){
-if (isNaN( payload.event.target.value[i])) {
-  console.log("not a number")
-points = 0
-}
+        let points = parseInt(payload.event.target.value)
+        for(let i = 0; i < payload.event.target.value.length; i++ ){
+          if(isNaN( payload.event.target.value[i])) {
+            console.log("not a number")
+            points = 0
+          }
          }
      
          const stateMatchesCopy = [...state.matches]
@@ -309,10 +309,10 @@ points = 0
     setMatchScore2_1vs1(state, payload){
       let points = parseInt(payload.event.target.value)
       for(let i = 0; i < payload.event.target.value.length; i++ ){
-if (isNaN( payload.event.target.value[i])) {
-console.log("not a number")
-points = 0
-}
+        if (isNaN( payload.event.target.value[i])) {
+          console.log("not a number")
+          points = 0
+        }
       }
       const stateMatchesCopy = [...state.matches]
       const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))

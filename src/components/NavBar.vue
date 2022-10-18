@@ -2,14 +2,15 @@
     <div>
         <header class="header__navbar">
             <div class="navbar">
-                <h1 class="navbar__logo"><a href="https://codepen.io/cryptoctopus/collections/popular/">Match Creator</a></h1>
+                <h1 class="navbar__logo"><router-link to="/">Match Creator</router-link></h1>
             <ul class="navbar__links">
                 <!-- <li><a href="#">Home</a></li> -->
-                <li><a href="https://github.com/RenaudGagne">Profile</a></li>
+                <li><router-link to="/profile"> Profile</router-link></li>
                 <!-- <li><a href="https://codepen.io/cryptoctopus/collections/popular/">Pen Collection</a></li> -->
                 
             </ul>
             </div>
+            
         </header> 
 
     </div>
@@ -121,5 +122,10 @@ main {
 		flex-direction: row;
 		justify-content: space-between;        
 	}
+}
+
+a.router-link-active {
+    font-weight: 1000;
+ 
 }
 </style>
