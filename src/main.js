@@ -29,10 +29,6 @@ const store = createStore ({
     actions:{
       pageForward({commit}){
         commit('pageForward')
-
-        ///otras forma de hacerlo: 
-        ///  pageForward(context){
-          // context.commit('pageForward')
       },
       selected(context, payload){
         context.commit('selected', payload)
@@ -53,10 +49,28 @@ const store = createStore ({
         context.commit('setSkills', payload)
       },
       filterBySkills(context, payload){
-        console.log("action")
         context.commit('filterBySkills', payload)
-      }
+      },
+      makeMatches1vs1({commit}){
 
+        commit('makeMatches1vs1')
+      },
+      makeMatches2vs2({commit}){
+        commit('makeMatches2vs2')
+      },
+      setMatchScore_2vs2(context, payload){
+        context.commit('setMatchScore_2vs2', payload)
+      },
+      setMatchScore2_2vs2(context, payload){
+        context.commit('setMatchScore_2vs2', payload)
+      },
+      setMatchScore_1vs1(context, payload){
+        context.commit('setMatchScore_1vs1', payload)
+      },
+      setMatchScore2_1vs1(context, payload){
+        context.commit('setMatchScore2_1vs1', payload)
+      }
+      
     },
   
     mutations:{
@@ -152,19 +166,15 @@ const store = createStore ({
            state.matches = newMatches2
            function shuffle(array) {
             let currentIndex = array.length,  randomIndex;
-          
             // While there remain elements to shuffle.
             while (currentIndex != 0) {
-          
               // Pick a remaining element.
               randomIndex = Math.floor(Math.random() * currentIndex);
               currentIndex--;
-          
               // And swap it with the current element.
               [array[currentIndex], array[randomIndex]] = [
                 array[randomIndex], array[currentIndex]];
             }
-          
             return array;
           }
           state.matches = shuffle(state.matches)
@@ -249,14 +259,11 @@ const store = createStore ({
       state.matches= matches
       function shuffle(array) {
         let currentIndex = array.length,  randomIndex;
-      
         // While there remain elements to shuffle.
         while (currentIndex != 0) {
-      
           // Pick a remaining element.
           randomIndex = Math.floor(Math.random() * currentIndex);
           currentIndex--;
-      
           // And swap it with the current element.
           [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
@@ -265,8 +272,6 @@ const store = createStore ({
         return array;
       }
       state.matches = shuffle(state.matches)
-
-
       },
      setMatchScore_2vs2(state, payload){
       let points = parseInt(payload.event.target.value)
@@ -280,136 +285,126 @@ const store = createStore ({
       const matchScoringPoints = stateMatchesCopy.find((match)=> match.id === payload.id)
       matchScoringPoints.teams[0].points = points
 
-        const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
-        for(let i=0; i < state.newPlayers.length; i++){
-            let pointsArrayToPushToThePlayer = [0,0]
-            const playerToPushThePointsId =state.newPlayers[i].playerIndex
-            const reducer = (previousValue, currentValue) => previousValue + currentValue;
-            for(let j=0; j < matchesFlateados.length; j++){
-                if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
+      const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
+      for(let i=0; i < state.newPlayers.length; i++){
+        let pointsArrayToPushToThePlayer = [0,0]
+        const playerToPushThePointsId =state.newPlayers[i].playerIndex
+        const reducer = (previousValue, currentValue) => previousValue + currentValue;
+          for(let j=0; j < matchesFlateados.length; j++){
+            if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
                     pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
 
-                }
-                if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
-                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-
-                }
             }
-                state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-        }
-        const sortedPlayers = [...state.newPlayers].sort((a, b) => {
-          return b.points - a.points;
+            if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+
+            }
+          }
+        state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+      }
+      const sortedPlayers = [...state.newPlayers].sort((a, b) => {
+        return b.points - a.points;
         });
-       state.newPlayers = sortedPlayers
+      state.newPlayers = sortedPlayers
      },
 
-     setMatchScore2_2vs2(state, payload){
-      let points = parseInt(payload.event.target.value)
-      for(let i = 0; i < payload.event.target.value.length; i++ ){
-        if (isNaN( payload.event.target.value[i])) {
-          console.log("not a number")
-          points = 0
+      setMatchScore2_2vs2(state, payload){
+        let points = parseInt(payload.event.target.value)
+        for(let i = 0; i < payload.event.target.value.length; i++ ){
+          if (isNaN( payload.event.target.value[i])) {
+            console.log("not a number")
+            points = 0
+          }
         }
-      }
         const matchScoringPoints = state.matches.find((match)=> match.id === payload.id)
         matchScoringPoints.teams[1].points = points
         const matchesFlateados = state.matches.map((match)=>  match.teams).flat()
-    
         for(let i=0; i < state.newPlayers.length; i++){
-            let pointsArrayToPushToThePlayer = [0,0]
-            const playerToPushThePointsId =state.newPlayers[i].playerIndex
-            const reducer = (previousValue, currentValue) => previousValue + currentValue;
-            for(let j=0; j < matchesFlateados.length; j++){
-                if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
-                        pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-                }
-                if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
-                    pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
+          let pointsArrayToPushToThePlayer = [0,0]
+          const playerToPushThePointsId =state.newPlayers[i].playerIndex
+          const reducer = (previousValue, currentValue) => previousValue + currentValue;
+          for(let j=0; j < matchesFlateados.length; j++){
+            if(playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex ){
+              pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
             }
+            if(playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex ){
+              pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
             }
-            state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+          }
+          state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
         }   
         const sortedPlayers = [...state.newPlayers].sort((a, b) => {
           return b.points - a.points;
-        });
-       state.newPlayers = sortedPlayers  
-        },
-         setMatchScore_1vs1(state, payload){
+          });
+        state.newPlayers = sortedPlayers  
+      },
 
+      setMatchScore_1vs1(state, payload){
         let points = parseInt(payload.event.target.value)
         for(let i = 0; i < payload.event.target.value.length; i++ ){
           if(isNaN( payload.event.target.value[i])) {
             console.log("not a number")
             points = 0
           }
-         }
-     
-         const stateMatchesCopy = [...state.matches]
-         const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
-         matchScoringPoints.teams[0].points = points
-
-           for(let i=0; i < state.newPlayers.length; i++){
-               let pointsArrayToPushToThePlayer = [0,0]
-               const playerToPushThePointsId =state.newPlayers[i].playerIndex
-               const reducer = (previousValue, currentValue) => previousValue + currentValue;
-               for(let j=0; j < state.matches.length; j++){
-                   if(playerToPushThePointsId === state.matches[j].teams[0].members[0].playerIndex ){
-                     const pointToPush = state.matches[j].teams[0].points
-                       pointsArrayToPushToThePlayer.push(pointToPush)
-                   }
-                   if(playerToPushThePointsId === state.matches[j].teams[1].members[0].playerIndex ){
-                    const pointToPush = state.matches[j].teams[1].points
-                      pointsArrayToPushToThePlayer.push(pointToPush)
-                  }
-               }
-                   state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-           }
-            const sortedPlayers = [...state.newPlayers].sort((a, b) => {
-                return b.points - a.points;
-              });
-             state.newPlayers = sortedPlayers
-
-
-        
-            
-     },
-     setMatchScore2_1vs1(state, payload){
-      let points = parseInt(payload.event.target.value)
-      for(let i = 0; i < payload.event.target.value.length; i++ ){
-        if (isNaN( payload.event.target.value[i])) {
-          console.log("not a number")
-          points = 0
         }
-      }
-      const stateMatchesCopy = [...state.matches]
-      const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
-      matchScoringPoints.teams[1].points = points
-
+        const stateMatchesCopy = [...state.matches]
+        const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
+        matchScoringPoints.teams[0].points = points
         for(let i=0; i < state.newPlayers.length; i++){
+          let pointsArrayToPushToThePlayer = [0,0]
+          const playerToPushThePointsId =state.newPlayers[i].playerIndex
+          const reducer = (previousValue, currentValue) => previousValue + currentValue;
+          for(let j=0; j < state.matches.length; j++){
+            if(playerToPushThePointsId === state.matches[j].teams[0].members[0].playerIndex ){
+              const pointToPush = state.matches[j].teams[0].points
+              pointsArrayToPushToThePlayer.push(pointToPush)
+            }
+            if(playerToPushThePointsId === state.matches[j].teams[1].members[0].playerIndex ){
+              const pointToPush = state.matches[j].teams[1].points
+              pointsArrayToPushToThePlayer.push(pointToPush)
+            }
+          }
+          state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
+        }
+        const sortedPlayers = [...state.newPlayers].sort((a, b) => {
+          return b.points - a.points;
+        });
+        state.newPlayers = sortedPlayers      
+      },
+     
+      setMatchScore2_1vs1(state, payload){
+        let points = parseInt(payload.event.target.value)
+        for(let i = 0; i < payload.event.target.value.length; i++ ){
+          if (isNaN( payload.event.target.value[i])) {
+            console.log("not a number")
+            points = 0
+          }
+        }
+        const stateMatchesCopy = [...state.matches]
+        const matchScoringPoints = stateMatchesCopy.find((match)=> parseInt(match.matchId) === parseInt(payload.id))
+        matchScoringPoints.teams[1].points = points
+
+          for(let i=0; i < state.newPlayers.length; i++){
             let pointsArrayToPushToThePlayer = [0,0]
             const playerToPushThePointsId =state.newPlayers[i].playerIndex
             const reducer = (previousValue, currentValue) => previousValue + currentValue;
             for(let j=0; j < state.matches.length; j++){
-                if(playerToPushThePointsId === state.matches[j].teams[1].members[0].playerIndex ){
-                  const pointToPush = state.matches[j].teams[1].points
-                    pointsArrayToPushToThePlayer.push(pointToPush)
-                }
-                if(playerToPushThePointsId === state.matches[j].teams[0].members[0].playerIndex ){
-                  const pointToPush = state.matches[j].teams[0].points
-                    pointsArrayToPushToThePlayer.push(pointToPush)
-    
-                }
+              if(playerToPushThePointsId === state.matches[j].teams[1].members[0].playerIndex ){
+                const pointToPush = state.matches[j].teams[1].points
+                pointsArrayToPushToThePlayer.push(pointToPush)
+              }
+              if(playerToPushThePointsId === state.matches[j].teams[0].members[0].playerIndex ){
+                const pointToPush = state.matches[j].teams[0].points
+                pointsArrayToPushToThePlayer.push(pointToPush)    
+              }
             }
             state.newPlayers[i].points= pointsArrayToPushToThePlayer.reduce(reducer);
-        }
-           
-        const sortedPlayers = [...state.newPlayers].sort((a, b) => {
-          return b.points - a.points;
-        });
-       state.newPlayers = sortedPlayers
-
-       },
-
+          }  
+          const sortedPlayers = [...state.newPlayers].sort((a, b) => {
+            return b.points - a.points;
+          });
+        state.newPlayers = sortedPlayers
+      },
     }
 
 })

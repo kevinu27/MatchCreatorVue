@@ -18,22 +18,22 @@
     name: 'MatchesList',
     methods: {        
       makeMatches1vs1() {
-        this.$store.commit("makeMatches1vs1");
+        this.$store.dispatch("makeMatches1vs1");
       },
       makeMatches2vs2() {
-        this.$store.commit("makeMatches2vs2");
+        this.$store.dispatch("makeMatches2vs2");
       },
       setMatchScore_2vs2(event, id){
-        this.$store.commit("setMatchScore_2vs2", { event: event, id: id });
+        this.$store.dispatch("setMatchScore_2vs2", { event: event, id: id });
       },
       setMatchScore2_2vs2(event, id){
-        this.$store.commit("setMatchScore2_2vs2", { event: event, id: id });
+        this.$store.dispatch("setMatchScore2_2vs2", { event: event, id: id });
       },
       setMatchScore_1vs1(event, id){
-        this.$store.commit("setMatchScore_1vs1", { event: event, id: id });
+        this.$store.dispatch("setMatchScore_1vs1", { event: event, id: id });
       },
       setMatchScore2_1vs1(event, id){
-        this.$store.commit("setMatchScore2_1vs1", { event: event, id: id });
+        this.$store.dispatch("setMatchScore2_1vs1", { event: event, id: id });
       },
     },
 
