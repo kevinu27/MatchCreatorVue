@@ -22,7 +22,6 @@
         },
         methods: {        
         addPlayers() {
-            this.$store.commit("addPlayers");
             this.$store.dispatch("pageForward");
         },
         setNames(event, id) {

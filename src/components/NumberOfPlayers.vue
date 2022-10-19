@@ -22,7 +22,6 @@ export default {
     },
     watch: {
         numberOfPlayers() {
-            console.log("entrando en el watch", this.numberOfPlayers);
             this.$store.dispatch("setNumberOfPlayers", this.numberOfPlayers);
         },
         selected(){
@@ -32,7 +31,7 @@ export default {
     },
     methods: {        
         addPlayers() {
-            this.$store.commit("addPlayers");
+            this.$store.dispatch("addPlayers");
             this.$store.dispatch('pageForward');
         },
     }

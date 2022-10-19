@@ -30,10 +30,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # MatchCreatorVue
 
+<ul>
 Todo:
-3- actions
-4- getter
-5- mutation.js, getters.js, action.js, mapGetter...
-6- auth
-7- guardar partidos
-8- traer partidos
+<li>3- actions</li>
+<li>4- getter</li>
+<li>5- mutation.js, getters.js, action.js, mapGetter...</li>
+<li>9- iconos o hovers explicativos de como usar la aplicacion</li>
+<li>6- auth</li>
+<li>7- guardar partidos</li>
+<li>8- traer partidos</li>
+</ul>

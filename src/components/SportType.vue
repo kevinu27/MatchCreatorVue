@@ -16,7 +16,7 @@ export default {
     },
     watch: {
         typeOfGame() {
-            this.$store.commit("setTypeOfGame", this.typeOfGame);
+            this.$store.dispatch("setTypeOfGame", this.typeOfGame);
         },
     },
   }

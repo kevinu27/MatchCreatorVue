@@ -39,6 +39,13 @@ const store = createStore ({
       },
       setNumberOfPlayers(context, payload){
         context.commit('setNumberOfPlayers', payload)
+      },
+      setTypeOfGame(context, payload){
+        context.commit('setTypeOfGame', payload)
+      },
+      addPlayers({commit}){
+        console.log("action")
+        commit('addPlayers')
       }
 
     },
