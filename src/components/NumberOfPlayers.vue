@@ -23,7 +23,7 @@ export default {
     watch: {
         numberOfPlayers() {
             console.log("entrando en el watch", this.numberOfPlayers);
-            this.$store.commit("setNumberOfPlayers", this.numberOfPlayers);
+            this.$store.dispatch("setNumberOfPlayers", this.numberOfPlayers);
         },
         selected(){
             console.log("selected", this.selected)

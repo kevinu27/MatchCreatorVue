@@ -34,9 +34,11 @@ const store = createStore ({
         ///  pageForward(context){
           // context.commit('pageForward')
       },
-      selected({commit}){
-        console.log("ACTION!!!!!!!!!!!!!!!!")
-        commit('selected')
+      selected(context, payload){
+        context.commit('selected', payload)
+      },
+      setNumberOfPlayers(context, payload){
+        context.commit('setNumberOfPlayers', payload)
       }
 
     },
@@ -54,7 +56,6 @@ const store = createStore ({
         state.selectedMatchVS = payload
       },
         setNumberOfPlayers(state, payload){
-      
             state.numberOfPlayers = payload
         },
 
