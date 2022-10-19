@@ -405,6 +405,12 @@ const store = createStore ({
           });
         state.newPlayers = sortedPlayers
       },
+    },
+    getters:{
+      numberOfPlayers(state){
+        console.log("getters-----")
+        return state.numberOfPlayers
+      }
     }
 
 })

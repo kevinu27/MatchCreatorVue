@@ -31,8 +31,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 # MatchCreatorVue
 
 <ul>
-Todo:
-<li>3- actions</li>
+##  Todo:
 <li>4- getter</li>
 <li>5- mutation.js, getters.js, action.js, mapGetter...</li>
 <li>9- iconos o hovers explicativos de como usar la aplicacion</li>
