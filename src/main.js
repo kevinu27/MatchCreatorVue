@@ -44,8 +44,17 @@ const store = createStore ({
         context.commit('setTypeOfGame', payload)
       },
       addPlayers({commit}){
-        console.log("action")
         commit('addPlayers')
+      },
+      setNames(context, payload){
+        context.commit('setNames', payload)
+      },
+      setSkills(context, payload){
+        context.commit('setSkills', payload)
+      },
+      filterBySkills(context, payload){
+        console.log("action")
+        context.commit('filterBySkills', payload)
       }
 
     },

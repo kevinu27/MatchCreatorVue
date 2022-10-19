@@ -25,13 +25,13 @@
             this.$store.dispatch("pageForward");
         },
         setNames(event, id) {
-            this.$store.commit("setNames", { event: event, id: id });
+            this.$store.dispatch("setNames", { event: event, id: id });
         },
         setSkills(event, id) {
-            this.$store.commit("setSkills", { event: event, id: id });
+            this.$store.dispatch("setSkills", { event: event, id: id });
         },
         getSlider(event){
-            this.$store.commit("filterBySkills", event);
+            this.$store.dispatch("filterBySkills", event);
         },  
     },
       }
