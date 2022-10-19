@@ -31,8 +31,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 # MatchCreatorVue
 
 Todo:
-1- ramdomizar la lista de partidos
 3- actions
 4- getter
-5- mutation.js, getters.js, action.js
-6-
+5- mutation.js, getters.js, action.js, mapGetter...
+6- auth
+7- guardar partidos
+8- traer partidos

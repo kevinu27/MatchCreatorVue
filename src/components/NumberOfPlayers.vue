@@ -27,13 +27,13 @@ export default {
         },
         selected(){
             console.log("selected", this.selected)
-            this.$store.commit("selected", this.selected)
+            this.$store.dispatch("selected", this.selected)
         }
     },
     methods: {        
         addPlayers() {
             this.$store.commit("addPlayers");
-            this.$store.commit("pageForward");
+            this.$store.dispatch('pageForward');
         },
     }
   }

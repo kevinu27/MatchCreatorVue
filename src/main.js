@@ -26,6 +26,20 @@ const store = createStore ({
             skillsFilter: 0
         }     
     },
+    actions:{
+      pageForward({commit}){
+        commit('pageForward')
+
+        ///otras forma de hacerlo: 
+        ///  pageForward(context){
+          // context.commit('pageForward')
+      },
+      selected({commit}){
+        console.log("ACTION!!!!!!!!!!!!!!!!")
+        commit('selected')
+      }
+
+    },
   
     mutations:{
       pageForward(state){
@@ -137,9 +151,9 @@ const store = createStore ({
             return array;
           }
           state.matches = shuffle(state.matches)
-    },
+     },
     
-    makeMatches2vs2(state){
+     makeMatches2vs2(state){
       const teams = []
       for (let i = 0; i < state.newPlayers.length; i++) {
         for (let j = 0; j < state.newPlayers.length; j++) {
@@ -153,7 +167,7 @@ const store = createStore ({
       for (let i = 0; i < teams.length; i++) {
           const player1 = teams[i][0];
           const player2 = teams[i][1];
-///mirar si es necesario o lo puedo quitar/////////////////////////////////////////////////////////////////////
+             ///mirar si es necesario o lo puedo quitar/////////////////////////////////////////////////////////////////////
           for (let j = 0; j < teams.length; j++) {
               if (i === j) {
               continue;
@@ -166,7 +180,7 @@ const store = createStore ({
               }
             }
           }
-/////////////////
+          /////////////////
       const matches = [];
       for (let i = 0; i < teams.length; i++) {
           for (let j = 0; j < teams.length; j++) {
@@ -213,7 +227,7 @@ const store = createStore ({
              break;
           }
       }
-    }
+     }
 
       state.matches= matches
       function shuffle(array) {
@@ -236,8 +250,8 @@ const store = createStore ({
       state.matches = shuffle(state.matches)
 
 
-  },
-    setMatchScore_2vs2(state, payload){
+      },
+     setMatchScore_2vs2(state, payload){
       let points = parseInt(payload.event.target.value)
       for(let i = 0; i < payload.event.target.value.length; i++ ){
         if (isNaN( payload.event.target.value[i])) {
@@ -270,9 +284,9 @@ const store = createStore ({
           return b.points - a.points;
         });
        state.newPlayers = sortedPlayers
-    },
+     },
 
-    setMatchScore2_2vs2(state, payload){
+     setMatchScore2_2vs2(state, payload){
       let points = parseInt(payload.event.target.value)
       for(let i = 0; i < payload.event.target.value.length; i++ ){
         if (isNaN( payload.event.target.value[i])) {
@@ -302,8 +316,8 @@ const store = createStore ({
           return b.points - a.points;
         });
        state.newPlayers = sortedPlayers  
-    },
-    setMatchScore_1vs1(state, payload){
+        },
+         setMatchScore_1vs1(state, payload){
 
         let points = parseInt(payload.event.target.value)
         for(let i = 0; i < payload.event.target.value.length; i++ ){
@@ -341,8 +355,8 @@ const store = createStore ({
 
         
             
-    },
-    setMatchScore2_1vs1(state, payload){
+     },
+     setMatchScore2_1vs1(state, payload){
       let points = parseInt(payload.event.target.value)
       for(let i = 0; i < payload.event.target.value.length; i++ ){
         if (isNaN( payload.event.target.value[i])) {
@@ -377,9 +391,9 @@ const store = createStore ({
         });
        state.newPlayers = sortedPlayers
 
-    },
+       },
 
-}
+    }
 
 })
 console.log(store)

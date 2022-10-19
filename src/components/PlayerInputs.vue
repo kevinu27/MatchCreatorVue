@@ -23,7 +23,7 @@
         methods: {        
         addPlayers() {
             this.$store.commit("addPlayers");
-            this.$store.commit("pageForward");
+            this.$store.dispatch("pageForward");
         },
         setNames(event, id) {
             this.$store.commit("setNames", { event: event, id: id });
