@@ -422,8 +422,16 @@ const store = createStore ({
       getCurrentPage(state){
         return state.currentPage
       },
+      getMatches(state){
+        return state.matches
+      },
+      getSelectedMatchVS(state){
+        return state.selectedMatchVS
+      },
+      getSkillsFilter(state){
+        return state.skillsFilter
+      }
     }
-
 })
 console.log(store)
 

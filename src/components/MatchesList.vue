@@ -1,19 +1,20 @@
 <template>
   <div>
-    <li v-for="(match, index) in $store.state.matches" v-bind:key="index" class="PlayerNameList" >
-      <div class="matchCard" v-if="$store.state.selectedMatchVS === '2vs2'"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore_2vs2($event, match.id)"> <input type="text" v-on:input="setMatchScore2_2vs2($event, match.id)"> </div></div>
-      <div class="matchCard" v-if="$store.state.selectedMatchVS === '1vs1'"> <p>{{match.teams[0].members[0].name}}<span> VS</span>   {{match.teams[1].members[0].name}} </p> <div class="inputScore"><input type="text" v-on:input="setMatchScore_1vs1($event, match.matchId)"><input type="text" v-on:input="setMatchScore2_1vs1($event,  match.matchId)"> </div></div>
+    <li v-for="(match, index) in getMatches" v-bind:key="index" class="PlayerNameList" >
+      <div class="matchCard" v-if="getSelectedMatchVS === '2vs2'"> <p>{{match.teams[0].members[0].name}} - {{match.teams[0].members[1].name}} <span> VS</span>  {{match.teams[1].members[0].name}} - {{match.teams[1].members[1].name}}</p> <div class="inputScore"><input type="text" v-on:input="setMatchScore_2vs2($event, match.id)"> <input type="text" v-on:input="setMatchScore2_2vs2($event, match.id)"> </div></div>
+      <div class="matchCard" v-if="getSelectedMatchVS === '1vs1'"> <p>{{match.teams[0].members[0].name}}<span> VS</span>   {{match.teams[1].members[0].name}} </p> <div class="inputScore"><input type="text" v-on:input="setMatchScore_1vs1($event, match.matchId)"><input type="text" v-on:input="setMatchScore2_1vs1($event,  match.matchId)"> </div></div>
     </li>
-    <div v-if="$store.state.selectedMatchVS === '1vs1'">
-      <button @click="makeMatches1vs1" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
+    <div v-if="getSelectedMatchVS === '1vs1'">
+      <button @click="makeMatches1vs1" class="btn btn-primary" v-if="getCurrentPage > 0">display matches</button>
     </div>
-    <div v-if="$store.state.selectedMatchVS === '2vs2'">
-      <button @click="makeMatches2vs2" class="btn btn-primary" v-if="$store.state.currentPage > 0">display matches</button>
+    <div v-if="getSelectedMatchVS === '2vs2'">
+      <button @click="makeMatches2vs2" class="btn btn-primary" v-if="getCurrentPage > 0">display matches</button>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
   export default {
     name: 'MatchesList',
     methods: {        
@@ -35,6 +36,9 @@
       setMatchScore2_1vs1(event, id){
         this.$store.dispatch("setSetMatchScore2_1vs1", { event: event, id: id });
       },
+    },
+    computed: {
+        ...mapGetters(['getMatches','getSelectedMatchVS', 'getCurrentPage'])
     },
 
   }

@@ -1,12 +1,12 @@
 <template>
     <div class="pLayerInput">
         <div  class="playerInputsList" v-if="getCurrentPage>0">
-            <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
+            <li v-for="(player, index) in getNewPlayers" v-bind:key="index" class="playerInputRow">
                 <div class="inputs"> <input type="text" placeholder="Player name" v-on:input="setNames($event, index)"></div>
                 <div class="inputs">   <input type="text" placeholder="Player skills" v-on:input="setSkills($event, index)"></div>
             </li>
         </div> 
-        <div class="inputRange" v-if="$store.state.selectedMatchVS === '2vs2'">
+        <div class="inputRange" v-if="getSelectedMatchVS === '2vs2'">
             <input type="range" min="0" max="10" steps="1" value= "10" v-on:input="getSlider" v-if="$store.state.currentPage > 0">  
         </div>
     </div>
@@ -35,7 +35,7 @@
    
     },
     computed: {
-        ...mapGetters(['getCurrentPage'])
+        ...mapGetters(['getCurrentPage', 'getSelectedMatchVS', 'getNewPlayers' ])
     },
       }
 </script>
