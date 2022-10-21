@@ -58,16 +58,16 @@ const store = createStore ({
       setMakeMatches2vs2({commit}){
         commit('makeMatches2vs2')
       },
-      setMatchScore_2vs2(context, payload){
+      setSetMatchScore_2vs2(context, payload){
         context.commit('setMatchScore_2vs2', payload)
       },
-      setMatchScore2_2vs2(context, payload){
-        context.commit('setMatchScore_2vs2', payload)
+      setSetMatchScore2_2vs2(context, payload){
+        context.commit('setMatchScore2_2vs2', payload)
       },
-      setMatchScore_1vs1(context, payload){
+      setSetMatchScore_1vs1(context, payload){
         context.commit('setMatchScore_1vs1', payload)
       },
-      setMatchScore2_1vs1(context, payload){
+      setSetMatchScore2_1vs1(context, payload){
         context.commit('setMatchScore2_1vs1', payload)
       }
       
@@ -274,6 +274,7 @@ const store = createStore ({
       state.matches = shuffle(state.matches)
       },
      setMatchScore_2vs2(state, payload){
+      console.log("  setMatchScore_2vs2(state, payload){")
       let points = parseInt(payload.event.target.value)
       for(let i = 0; i < payload.event.target.value.length; i++ ){
         if (isNaN( payload.event.target.value[i])) {
@@ -309,6 +310,7 @@ const store = createStore ({
      },
 
       setMatchScore2_2vs2(state, payload){
+        console.log(" setMatchScore2_2vs2(state, payload){")
         let points = parseInt(payload.event.target.value)
         for(let i = 0; i < payload.event.target.value.length; i++ ){
           if (isNaN( payload.event.target.value[i])) {

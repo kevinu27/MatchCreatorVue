@@ -24,16 +24,16 @@
         this.$store.dispatch("setMakeMatches2vs2");
       },
       setMatchScore_2vs2(event, id){
-        this.$store.dispatch("setMatchScore_2vs2", { event: event, id: id });
+        this.$store.dispatch("setSetMatchScore_2vs2", { event: event, id: id });
       },
       setMatchScore2_2vs2(event, id){
-        this.$store.dispatch("setMatchScore2_2vs2", { event: event, id: id });
+        this.$store.dispatch("setSetMatchScore2_2vs2", { event: event, id: id });
       },
       setMatchScore_1vs1(event, id){
-        this.$store.dispatch("setMatchScore_1vs1", { event: event, id: id });
+        this.$store.dispatch("setSetMatchScore_1vs1", { event: event, id: id });
       },
       setMatchScore2_1vs1(event, id){
-        this.$store.dispatch("setMatchScore2_1vs1", { event: event, id: id });
+        this.$store.dispatch("setSetMatchScore2_1vs1", { event: event, id: id });
       },
     },
 
