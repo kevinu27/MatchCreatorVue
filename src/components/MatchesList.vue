@@ -18,10 +18,10 @@
     name: 'MatchesList',
     methods: {        
       makeMatches1vs1() {
-        this.$store.dispatch("makeMatches1vs1");
+        this.$store.dispatch("setMakeMatches1vs1");
       },
       makeMatches2vs2() {
-        this.$store.dispatch("makeMatches2vs2");
+        this.$store.dispatch("setMakeMatches2vs2");
       },
       setMatchScore_2vs2(event, id){
         this.$store.dispatch("setMatchScore_2vs2", { event: event, id: id });

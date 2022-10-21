@@ -27,7 +27,7 @@ const store = createStore ({
         }     
     },
     actions:{
-      pageForward({commit}){
+      setPageForward({commit}){
         commit('pageForward')
       },
       selected(context, payload){
@@ -39,7 +39,8 @@ const store = createStore ({
       setTypeOfGame(context, payload){
         context.commit('setTypeOfGame', payload)
       },
-      addPlayers({commit}){
+      setAddPlayers({commit}){
+        console.log("ACTIONS addplayer")
         commit('addPlayers')
       },
       setNames(context, payload){
@@ -48,14 +49,13 @@ const store = createStore ({
       setSkills(context, payload){
         context.commit('setSkills', payload)
       },
-      filterBySkills(context, payload){
+      setFilterBySkills(context, payload){
         context.commit('filterBySkills', payload)
       },
-      makeMatches1vs1({commit}){
-
+      setMakeMatches1vs1({commit}){
         commit('makeMatches1vs1')
       },
-      makeMatches2vs2({commit}){
+      setMakeMatches2vs2({commit}){
         commit('makeMatches2vs2')
       },
       setMatchScore_2vs2(context, payload){
@@ -407,10 +407,19 @@ const store = createStore ({
       },
     },
     getters:{
-      numberOfPlayers(state){
+      getNumberOfPlayers(state){
         console.log("getters-----")
         return state.numberOfPlayers
-      }
+      },
+      getTypeOfGame(state){
+        return state.typeOfGame
+      },
+      getNewPlayers(state){
+        return state.newPlayers
+      },
+      getCurrentPage(state){
+        return state.currentPage
+      },
     }
 
 })

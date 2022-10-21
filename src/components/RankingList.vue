@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div class="rankingNames" v-for="(newPlayers, index) in $store.state.newPlayers" v-bind:key="index">
+    <div class="rankingNames" v-for="(newPlayers, index) in getNewPlayers" v-bind:key="index">
       <div class="playerNameAndPoints"><h2>{{newPlayers.name}} - {{newPlayers.points}}</h2></div>
     </div>
   </div>
 </template>
     
 <script>
+  import {mapGetters} from 'vuex'
     export default {
       name: 'RankingList',
       data() {
@@ -14,6 +15,9 @@
             
             };
         },
+        computed: {
+        ...mapGetters(['getNewPlayers'])
+    },
 
       }
 </script>

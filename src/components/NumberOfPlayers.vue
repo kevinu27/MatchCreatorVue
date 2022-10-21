@@ -6,7 +6,7 @@
         </select>
         <div class="buttonInput">
             <input type="number" class="numer" v-model="numberOfPlayers" >
-            <button @click="addPlayers" v-if="numberOfPlayers > 0">Set players inputs</button>
+            <button @click="addPlayers" v-if="getNumberOfPlayers > 0">Set players inputs</button>
         </div>
     </div>
 </template>
@@ -31,12 +31,12 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['numberOfPlayers'])
+        ...mapGetters(['getNumberOfPlayers'])
     },
     methods: {        
         addPlayers() {
-            this.$store.dispatch("addPlayers");
-            this.$store.dispatch('pageForward');
+            this.$store.dispatch("setAddPlayers");
+            this.$store.dispatch('setPageForward');
         },
     }
   }

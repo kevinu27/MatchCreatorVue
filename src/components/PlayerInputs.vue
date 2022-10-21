@@ -1,6 +1,6 @@
 <template>
     <div class="pLayerInput">
-        <div  class="playerInputsList" v-if="$store.state.currentPage>0">
+        <div  class="playerInputsList" v-if="getCurrentPage>0">
             <li v-for="(player, index) in $store.state.newPlayers" v-bind:key="index" class="playerInputRow">
                 <div class="inputs"> <input type="text" placeholder="Player name" v-on:input="setNames($event, index)"></div>
                 <div class="inputs">   <input type="text" placeholder="Player skills" v-on:input="setSkills($event, index)"></div>
@@ -13,6 +13,7 @@
 </template>
     
 <script>
+    import {mapGetters} from 'vuex'
     export default {
       name: 'PlayerInputs',
       data() {
@@ -21,9 +22,7 @@
             };
         },
         methods: {        
-        addPlayers() {
-            this.$store.dispatch("pageForward");
-        },
+  
         setNames(event, id) {
             this.$store.dispatch("setNames", { event: event, id: id });
         },
@@ -31,8 +30,12 @@
             this.$store.dispatch("setSkills", { event: event, id: id });
         },
         getSlider(event){
-            this.$store.dispatch("filterBySkills", event);
+            this.$store.dispatch("setFilterBySkills", event);
         },  
+   
+    },
+    computed: {
+        ...mapGetters(['getCurrentPage'])
     },
       }
 </script>

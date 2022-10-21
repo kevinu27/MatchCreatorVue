@@ -1,18 +1,22 @@
 <template>
     <div>
         <h4>What are you going to play?</h4>
-        <h4>{{$store.state.typeOfGame}}</h4>
+        <h4>{{typeOfGame}}</h4>
         <input type="text" v-model="typeOfGame" >
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: 'SportType',
   data() {
         return {
             typeOfGame: "",
         };
+    },
+    computed: {
+        ...mapGetters(['getTypeOfGame'])
     },
     watch: {
         typeOfGame() {
