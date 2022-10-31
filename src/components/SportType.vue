@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
   name: 'SportType',
   data() {
@@ -15,12 +15,17 @@ export default {
             typeOfGame: "",
         };
     },
+    methods:{
+        ...mapActions(['setTypeOfGame'])
+    },
     computed: {
         ...mapGetters(['getTypeOfGame'])
     },
     watch: {
         typeOfGame() {
-            this.$store.dispatch("setTypeOfGame", this.typeOfGame);
+            // this.$store.dispatch("setTypeOfGame", this.typeOfGame);
+           this.setTypeOfGame(this.typeOfGame)
+            
         },
     },
   }
