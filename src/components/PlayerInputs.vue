@@ -10,6 +10,9 @@
             <input type="range" min="0" max="10" steps="1" value= "10" v-on:input="getSlider" v-if="$store.state.currentPage > 0">  
         </div>
     </div>
+<div v-if="getMatches.length > 0" class="numberOfMatches">
+    <p>The number of Matches is {{ getMatches.length}}</p>
+</div>
 </template>
     
 <script>
@@ -35,12 +38,15 @@
    
     },
     computed: {
-        ...mapGetters(['getCurrentPage', 'getSelectedMatchVS', 'getNewPlayers' ])
+        ...mapGetters(['getCurrentPage', 'getSelectedMatchVS', 'getNewPlayers', 'getMatches' ])
     },
       }
 </script>
     
 <style scoped>
+.numberOfMatches{
+    margin-top: 3rem;
+}
    .inputs input{
         height: 3rem;
         border: 1px solid lightgray;
