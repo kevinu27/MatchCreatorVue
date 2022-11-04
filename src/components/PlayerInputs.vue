@@ -11,7 +11,7 @@
         </div>
     </div>
 <div v-if="getMatches.length > 0" class="numberOfMatches">
-    <p>The number of Matches is {{ getMatches.length}}</p>
+    <p>The number of Matches to play is <span> {{ getMatches.length}}</span></p>
 </div>
 </template>
     
@@ -46,6 +46,11 @@
 <style scoped>
 .numberOfMatches{
     margin-top: 3rem;
+}
+.numberOfMatches span{
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 0.8rem;
 }
    .inputs input{
         height: 3rem;
