@@ -14,8 +14,9 @@
               <router-link to="/profile">Profile</router-link>
               <a href="#">login</a>
               <!-- refactor el boton con mutation etc -->
-              <button @click="openModal">login</button>
+              <button @click="openModalLogin">login</button>
               <a href="#">register</a>
+              <button @click="openModalSignup">register</button>
               <a href="#">logout</a>
             </div>
           </div>
@@ -33,9 +34,13 @@ export default {
     return {};
   },
   methods: {
-    openModal() {
-      console.log("boton del login", this.$store.state.showModal);
-      this.$store.state.showModal = true;
+    openModalLogin() {
+      console.log("boton del login", this.$store.state.showModalLogin);
+      this.$store.state.showModalLogin = true;
+    },
+    openModalSignup() {
+      console.log("boton del signup", this.$store.state.showModalSignup);
+      this.$store.state.showModalSignup = true;
     },
   },
 };

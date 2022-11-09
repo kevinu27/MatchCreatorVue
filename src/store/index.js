@@ -12,7 +12,8 @@ const store = createStore ({
             currentPage: 0,
             selectedMatchVS: "",
             skillsFilter: 0,
-            showModal: false,
+            showModalLogin: false,
+            showModalSignup: false,
         }     
     },
     actions: rootActions,

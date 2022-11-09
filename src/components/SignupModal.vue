@@ -2,10 +2,10 @@
   <div>
     <div
       class="modal-overlay"
-      v-if="$store.state.openModalSignup == true"
+      v-if="$store.state.showModalSignup == true"
       @click="closeModal"
     ></div>
-    <div class="modal" v-if="$store.state.openModalSignup == true">
+    <div class="modal" v-if="$store.state.showModalSignup == true">
       <div class="closingX">
         <h1 @click="closeModal">X</h1>
       </div>
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     closeModal() {
-      this.$store.state.openModalSignup = false;
+      this.$store.state.showModalSignup = false;
     },
   },
 };
