@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4>What are you going to play?</h4>
+        <h4>What game or sport are you going to play?</h4>
         <h4>{{typeOfGame}}</h4>
         <input type="text" v-model="typeOfGame" >
     </div>

@@ -11,7 +11,8 @@ const store = createStore ({
             matches: [],
             currentPage: 0,
             selectedMatchVS: "",
-            skillsFilter: 0
+            skillsFilter: 0,
+            showModal: false,
         }     
     },
     actions: rootActions,

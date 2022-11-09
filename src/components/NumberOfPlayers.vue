@@ -5,8 +5,12 @@
             <option>2vs2</option>
         </select>
         <div class="buttonInput">
+            <div>
+                <p>Number of players:</p>
             <input type="number" class="numer" v-model="numberOfPlayers" >
-            <button @click="addPlayers" v-if="getNumberOfPlayers > 0">Set players inputs</button>
+        </div>
+            <button @click="addPlayers" v-if="getNumberOfPlayers > 0" class="showPlayerButton">Show players </button>
+            <p class="tooltips">This button will display the text inputs where you will have to insert the players names</p>
         </div>
     </div>
 </template>
@@ -43,6 +47,21 @@ export default {
 </script>
 
 <style scoped>
+.showPlayerButton:hover + .tooltips{
+visibility: visible;
+}
+
+.tooltips{
+background-color: rgba(0,0,0,0.8) ;
+color: white;
+padding:1rem;
+border-radius: 0.5rem;
+visibility: hidden;
+margin-top: 0px;
+}
+/* .tooltip:hover .tooltiptext {
+  visibility: visible;
+} */
 .buttonInput{
     display: flex;
     flex-direction: column;
