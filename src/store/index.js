@@ -14,6 +14,9 @@ const store = createStore ({
             skillsFilter: 0,
             showModalLogin: false,
             showModalSignup: false,
+            userId: null,
+            token: null,
+            tokenExpiration:null
         }     
     },
     actions: rootActions,

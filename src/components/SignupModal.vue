@@ -10,12 +10,14 @@
         <h1 @click="closeModal">X</h1>
       </div>
       <h1>Signup</h1>
+      <h3>name</h3>
+      <input type="text" v-model="name" />
       <h3>email</h3>
-      <input type="email" />
+      <input type="email" v-model="email" />
       <h3>password</h3>
-      <input type="password" />
+      <input type="password" v-model="password" />
       <br />
-      <button class="loginButton">Signup</button>
+      <button class="loginButton" @click="loginSubmit">Signup</button>
     </div>
   </div>
 </template>
@@ -24,11 +26,41 @@
 export default {
   name: "SignupModal",
   data() {
-    return {};
+    return {
+      name: "",
+      email: "",
+      password: "",
+      formisvalid: true,
+    };
   },
   methods: {
     closeModal() {
       this.$store.state.showModalSignup = false;
+    },
+    loginSubmit() {
+      console.log("email", this.email);
+      //---------con esto guardo en una tabla
+      // fetch("https://brazo2.firebaseio.com/users.json", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ email: this.email, password: this.password }),
+      // });
+      //--------Get para traer de la tabla
+      // fetch("https://brazo2.firebaseio.com/users.json")
+      //   .then((response) => {
+      //     if (response.ok) {
+      //       return response.json();
+      //     }
+      //   })
+      //   .then((data) => {
+      //     console.log("data de la tabla de firebase", data);
+      //   });
+      this.$store.dispatch("signup", {
+        email: this.email,
+        password: this.password,
+      });
     },
   },
 };

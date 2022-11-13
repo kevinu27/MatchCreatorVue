@@ -24,7 +24,11 @@
 export default {
   name: "LoginModal",
   data() {
-    return {};
+    return {
+      email: "",
+      password: "",
+      formisvalid: true,
+    };
   },
   methods: {
     closeModal() {

@@ -43,7 +43,33 @@ export default {
       },
       setSetMatchScore2_1vs1(context, payload){
         context.commit('setMatchScore2_1vs1', payload)
-      }
+      },
+      //AUTH
+      // login(context, payload){},
+      async signup(context, payload){ // async con await es alternativa al .then()
+       const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCOOlaLy5WDpDuGz3PTPLCdGLpqX_iHHWs', {
+          method: 'POST',
+          body: JSON.stringify({
+            // name: payload.name,
+            email: payload.email,
+            password:payload.password,
+            returnSecureToken: true
+          })
+        }) 
+        const responseData =await response.json();
+        if(!response.ok){
+          console.log("respondeDAta en momento de error", responseData)
+          const error = new Error(responseData.message || 'failed to authenticate.')
+          throw error;
+        }
+        console.log("responseData", responseData)
+        context.commit('setUser', {
+          token: responseData.idToken,
+          userId: responseData.localId,
+          tokenExpiration: responseData.expiresIn
+        })
+      },
+      // logout(context, payload){},
 
 
 }
