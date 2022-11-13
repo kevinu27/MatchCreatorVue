@@ -11,11 +11,11 @@
       </div>
       <h1>Login</h1>
       <h3>email</h3>
-      <input type="email" />
+      <input type="email" v-model="email" />
       <h3>password</h3>
-      <input type="password" />
+      <input type="password" v-model="password" />
       <br />
-      <button class="loginButton">Login</button>
+      <button class="loginButton" @click="loginSubmit">Login</button>
     </div>
   </div>
 </template>
@@ -34,6 +34,36 @@ export default {
     closeModal() {
       console.log("boton de cerrar el modal", this.$store.state.showModalLogin);
       this.$store.state.showModalLogin = false;
+    },
+    async loginSubmit() {
+      console.log("entrando en el loginSubimit");
+
+      // this.formisvalid = true;
+      // if (
+      //   this.email === "" ||
+      //   !this.email.includes("@") ||
+      //   this.password.length < 6
+      // ) {
+      //   this.formisvalid = true;
+      //   return;
+      // }
+      // this.isLoading = true;
+      console.log("email", this.email);
+      console.log("pass", this.password);
+      try {
+        console.log("trying");
+        await this.$store.dispatch("login", {
+          email: this.email,
+          password: this.password,
+        });
+      } catch (err) {
+        console.log("email", this.email);
+        console.log("pass", this.password);
+        console.log("error");
+        this.error = err.message || "failed to authenticate";
+      }
+
+      this.isLoading = false;
     },
   },
 };

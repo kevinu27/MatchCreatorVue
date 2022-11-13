@@ -4,6 +4,8 @@ import {createRouter, createWebHistory} from 'vue-router'
 import UserProfile from './components/UserProfile.vue'
 import MainGame from './components/MainGame.vue'
 import store from './store/index.js'
+// require("dotenv").config();
+// console.log("dotenv", process.env.URL)
 
 const router = createRouter({
 history: createWebHistory(),

@@ -16,8 +16,9 @@
       <input type="email" v-model="email" />
       <h3>password</h3>
       <input type="password" v-model="password" />
+      <div v-if="isLoading"><p>Authenticating...</p></div>
       <br />
-      <button class="loginButton" @click="loginSubmit">Signup</button>
+      <button class="loginButton" @click="signSubmit">Signup</button>
     </div>
   </div>
 </template>
@@ -31,14 +32,17 @@ export default {
       email: "",
       password: "",
       formisvalid: true,
+      isLoading: false,
+      error: null,
     };
   },
   methods: {
     closeModal() {
       this.$store.state.showModalSignup = false;
     },
-    loginSubmit() {
-      console.log("email", this.email);
+    // Async en el signSUbmit y await en el dispatch no es necesario, pero es para que hasta que no llegue la respuesta no deje de hacer el loading, despues ya que se ejecute
+    async signSubmit() {
+      console.log("entrando en el signSubimit");
       //---------con esto guardo en una tabla
       // fetch("https://brazo2.firebaseio.com/users.json", {
       //   method: "POST",
@@ -57,10 +61,26 @@ export default {
       //   .then((data) => {
       //     console.log("data de la tabla de firebase", data);
       //   });
-      this.$store.dispatch("signup", {
-        email: this.email,
-        password: this.password,
-      });
+      this.formisvalid = true;
+      if (
+        this.email === "" ||
+        !this.email.includes("@") ||
+        this.password.length < 6
+      ) {
+        this.formisvalid = true;
+        return;
+      }
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("signup", {
+          email: this.email,
+          password: this.password,
+        });
+      } catch (err) {
+        this.error = err.message || "failed to authenticate";
+      }
+
+      this.isLoading = false;
     },
   },
 };
