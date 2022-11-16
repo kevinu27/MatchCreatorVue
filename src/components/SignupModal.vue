@@ -44,13 +44,13 @@ export default {
     async signSubmit() {
       console.log("entrando en el signSubimit");
       //---------con esto guardo en una tabla
-      // fetch("https://brazo2.firebaseio.com/users.json", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ email: this.email, password: this.password }),
-      // });
+      fetch("https://brazo2.firebaseio.com/users.json", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: this.email, password: this.password }),
+      });
       //--------Get para traer de la tabla
       // fetch("https://brazo2.firebaseio.com/users.json")
       //   .then((response) => {

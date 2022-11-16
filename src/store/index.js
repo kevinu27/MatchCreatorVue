@@ -16,7 +16,8 @@ const store = createStore ({
             showModalSignup: false,
             userId: null,
             token: null,
-            tokenExpiration:null
+            tokenExpiration:null,
+            matchesDisplayed: false,
         }     
     },
     actions: rootActions,
