@@ -339,7 +339,7 @@ export default {
   saveMatches(state) {
     const playerNamesList = []
     state.newPlayers.map(element => playerNamesList.push(element.name))
-    fetch(`https://brazo2.firebaseio.com/matches.json?auth=` + state.token, {
+    fetch(`https://brazo2.firebaseio.com/matches/${state.userId}.json?auth=` + state.token, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
