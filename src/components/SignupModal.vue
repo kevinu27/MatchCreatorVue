@@ -49,7 +49,7 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: this.email, password: this.password }),
+        body: JSON.stringify({ email: this.email, password: this.password}),
       });
       //--------Get para traer de la tabla
       // fetch("https://brazo2.firebaseio.com/users.json")

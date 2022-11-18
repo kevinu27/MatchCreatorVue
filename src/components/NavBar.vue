@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { translation } from "./../../configuration.js"
 export default {
   name: "NavBar",
   data() {
@@ -35,6 +36,7 @@ export default {
   },
   methods: {
     openModalLogin() {
+      console.log("translation", translation)
       console.log("boton del login", this.$store.state.showModalLogin);
       this.$store.state.showModalLogin = true;
     },
