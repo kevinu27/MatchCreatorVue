@@ -61,11 +61,17 @@ export default {
       const error = new Error(responseData.message || 'failed to authenticate.')
       throw error;
     }
+    const expiresIn = +responseData.expiresIn * 1000  // el "+" convierte la string a number, y "* 1000" está multiplicando por milisecond para pasar las unidades a miliseconds
+    const expirationDate = new Date().getTime() + expiresIn
+    localStorage.setItem('token', responseData.idToken)
+    localStorage.setItem('userId', responseData.userId)
+    localStorage.setItem('tokenExpiration', expirationDate)
+
     console.log("responseData", responseData)
     context.commit('setUser', {
       token: responseData.idToken,
-      userId: responseData.localId,
-      tokenExpiration: responseData.expiresIn
+      userId: responseData.userId,
+      tokenExpiration: expirationDate
     })
   },
   async signup(context, payload) { // async con await es alternativa al .then()
@@ -87,7 +93,7 @@ export default {
     console.log("responseData", responseData)
     context.commit('setUser', {
       token: responseData.idToken,
-      userId: responseData.localId,
+      userId: responseData.userId,
       tokenExpiration: responseData.expiresIn
     })
   },
@@ -101,11 +107,25 @@ export default {
   //   state.userId = null
   //   state.tokenExpiration = null
   // },
+  autoLogin(context){
+    const token = localStorage.getItem('token')
+    const userId = localStorage.getItem('userId')
+ 
+    if (token && userId){
+      context.commit('setUser', {
+      token: token,
+      userId: userId,
+
+    })
+  }
+
+  },
   logout(context) {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
     context.commit('setUser', {
       token: null,
       userId: null,
-      tokenExpiration: null
     })
 
   },

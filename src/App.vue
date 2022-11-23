@@ -1,25 +1,24 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <router-view>
-    </router-view>
-
-</div>
+    <router-view> </router-view>
+  </div>
 </template>
 
 <script>
-
-import NavBar from './components/NavBar.vue'
+import NavBar from "./components/NavBar.vue";
 // import MainView from './components/MainView.vue';
 
-
 export default {
-  name: 'App',
+  name: "App",
   components: {
     NavBar,
     // MainView
-}
-}
+  },
+  created() {
+    this.$store.dispatch("autoLogin");
+  },
+};
 </script>
 
 <style>
@@ -55,7 +54,6 @@ body {
   -webkit-border-radius: 0 0 25px 25px;
   display: flex;
   justify-content: center;
-
 }
 .cup p {
   font-weight: bold;
@@ -79,7 +77,7 @@ body {
   margin-left: -15px;
   height: 25px;
   width: 25px;
-  border: 5px solid rgba(255, 215, 0);;
+  border: 5px solid rgba(255, 215, 0);
   background: rgba(255, 215, 0);
   border-radius: 0 0 0 55px;
 }
@@ -90,7 +88,7 @@ body {
   height: 25px;
   width: 25px;
   border: 5px solid rgba(255, 215, 0);
-  background:  rgba(255, 215, 0);
+  background: rgba(255, 215, 0);
   border-radius: 0 0 55px 0;
 }
 
@@ -101,5 +99,4 @@ body {
   width: 40px;
   background: rgba(255, 215, 0);
 }
-
 </style>

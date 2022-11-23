@@ -64,6 +64,7 @@ export default {
       }
 
       this.isLoading = false;
+      this.closeModal();
     },
   },
 };
