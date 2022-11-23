@@ -96,7 +96,18 @@ export default {
     commit('saveMatches')
   },
 
-  // logout(context, payload){},
+  // logout(state) {
+  //   state.token = null
+  //   state.userId = null
+  //   state.tokenExpiration = null
+  // },
+  logout(context) {
+    context.commit('setUser', {
+      token: null,
+      userId: null,
+      tokenExpiration: null
+    })
 
+  },
 
 }

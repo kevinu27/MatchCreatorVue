@@ -11,13 +11,11 @@
           <div class="dropdown">
             <li><router-link to="/profile"> User</router-link></li>
             <div class="dropdown-content">
-              <router-link to="/profile">Profile</router-link>
-              <a href="#">login</a>
+              <router-link to="/profile" v-if="isLoggedIn">Profile</router-link>
+              <a href="#" @click="openModalLogin" v-if="!isLoggedIn">login</a>
               <!-- refactor el boton con mutation etc -->
-              <button @click="openModalLogin">login</button>
-              <a href="#">register</a>
-              <button @click="openModalSignup">register</button>
-              <a href="#">logout</a>
+              <a href="#" @click="openModalSignup" v-if="!isLoggedIn">register</a>
+              <a href="#" v-if="isLoggedIn" @click="logout">logout</a>
             </div>
           </div>
           <!-- <li><a href="https://codepen.io/cryptoctopus/collections/popular/">Pen Collection</a></li> -->
@@ -34,7 +32,15 @@ export default {
   data() {
     return {};
   },
+  computed:{
+    isLoggedIn(){
+      return this.$store.getters.isAuthenticated
+    }
+  },
   methods: {
+    logout(){
+      this.$store.dispatch('logout')
+    },
     openModalLogin() {
       console.log("translation", translation)
       console.log("boton del login", this.$store.state.showModalLogin);
