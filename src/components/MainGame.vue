@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Welcome to Match Creator</h1>
+    <h1>
+      {{ translationLabel.welcome }}
+    </h1>
     <div class="container">
       <div class="trophy">
         <div class="cup"><p>1</p></div>
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+import { translation } from "./../../configuration.js";
 import SportType from "./SportType.vue";
 import NumberOfPlayers from "./NumberOfPlayers.vue";
 import PlayerInputs from "./PlayerInputs.vue";
@@ -39,9 +42,21 @@ export default {
     msg: String,
   },
   data() {
-    return {};
+    return {
+      translationLabel: {
+        welcome: "",
+      },
+    };
   },
-  methods: {},
+  methods: {
+    translation() {
+      this.translationLabel.welcome = translation.welcomeLabel.english;
+    },
+  },
+  mounted() {
+    this.translation();
+  },
+
   components: {
     SportType,
     NumberOfPlayers,
