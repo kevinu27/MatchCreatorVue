@@ -7,7 +7,9 @@ node_modules
 .env.local
 .env.*.local
 process.env
+process.env*
 .env
+.env*
 
 # Log files
 npm-debug.log*
