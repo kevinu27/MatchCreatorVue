@@ -12,6 +12,7 @@
         <div class="base"></div>
       </div>
     </div>
+    <div>URL: {{ url }}</div> 
 
     <LoginModal></LoginModal>
     <SignupModal></SignupModal>
@@ -43,6 +44,7 @@ export default {
   },
   data() {
     return {
+      url: process.env.VUE_APP_URL,
       translationLabel: {
         welcome: "",
       },
