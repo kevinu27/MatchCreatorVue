@@ -45,10 +45,13 @@ export default {
       console.log("translation", translation)
       console.log("boton del login", this.$store.state.showModalLogin);
       this.$store.state.showModalLogin = true;
+      document.documentElement.style.overflow = 'hidden'
+
     },
     openModalSignup() {
       console.log("boton del signup", this.$store.state.showModalSignup);
       this.$store.state.showModalSignup = true;
+      document.documentElement.style.overflow = 'hidden'
     },
   },
 };

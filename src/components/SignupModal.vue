@@ -39,6 +39,7 @@ export default {
   methods: {
     closeModal() {
       this.$store.state.showModalSignup = false;
+      document.documentElement.style.overflow = 'auto'
     },
     // Async en el signSUbmit y await en el dispatch no es necesario, pero es para que hasta que no llegue la respuesta no deje de hacer el loading, despues ya que se ejecute
     async signSubmit() {

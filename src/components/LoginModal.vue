@@ -34,6 +34,7 @@ export default {
     closeModal() {
       console.log("boton de cerrar el modal", this.$store.state.showModalLogin);
       this.$store.state.showModalLogin = false;
+      document.documentElement.style.overflow = 'auto'
     },
     async loginSubmit() {
       console.log("entrando en el loginSubimit");
