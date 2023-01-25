@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import AuthenticationService from '@/services/AuthenticationService';
 export default {
   name: "LoginModal",
   data() {
@@ -38,6 +39,18 @@ export default {
     },
     async loginSubmit() {
       console.log("entrando en el loginSubimit");
+            /// con mysql
+      // esto al final ponerlo en el store
+      try{
+
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.password,
+        })
+        console.log(response.data)
+      }catch (error) {
+        this.error = error.response.data.error
+        }
 
       // this.formisvalid = true;
       // if (
@@ -49,8 +62,8 @@ export default {
       //   return;
       // }
       // this.isLoading = true;
-      console.log("email", this.email);
-      console.log("pass", this.password);
+      // console.log("email", this.email);
+      // console.log("pass", this.password);
       try {
         console.log("trying");
         await this.$store.dispatch("login", {

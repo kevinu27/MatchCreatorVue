@@ -1,3 +1,4 @@
+import AuthenticationService from '@/services/AuthenticationService';
 export default {
   setPageForward({ commit }) {
     commit('pageForward')
@@ -58,6 +59,7 @@ export default {
     const responseData = await response.json();
     if (!response.ok) {
       console.log("respondeDAta en momento de error", responseData)
+// console.log("email", email)
       const error = new Error(responseData.message || 'failed to authenticate.')
       throw error;
     }
@@ -75,27 +77,37 @@ export default {
     })
   },
   async signup(context, payload) { // async con await es alternativa al .then()
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCOOlaLy5WDpDuGz3PTPLCdGLpqX_iHHWs', {
-      method: 'POST',
-      body: JSON.stringify({
-        // name: payload.name,
+ 
+      const response = await AuthenticationService.register({
         email: payload.email,
         password: payload.password,
-        returnSecureToken: true
+        name: payload.name
       })
-    })
-    const responseData = await response.json();
-    if (!response.ok) {
-      console.log("respondeDAta en momento de error", responseData)
-      const error = new Error(responseData.message || 'failed to authenticate.')
-      throw error;
-    }
-    console.log("responseData", responseData)
+      console.log("response.data en el action,js", response.data)
+ 
+    
+    // const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCOOlaLy5WDpDuGz3PTPLCdGLpqX_iHHWs', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     // name: payload.name,
+    //     email: payload.email,
+    //     password: payload.password,
+    //     returnSecureToken: true
+    //   })
+    // })
+    // const responseData = await response.json();
+    // if (!response.ok) {
+    //   console.log("respondeDAta en momento de error", responseData)
+    //   const error = new Error(responseData.message || 'failed to authenticate.')
+    //   throw error;
+    // }
+    // console.log("responseData", responseData)
     context.commit('setUser', {
-      token: responseData.idToken,
-      userId: responseData.userId,
-      tokenExpiration: responseData.expiresIn
+      token: response.data.token,
+      userId: response.data.user.id,
+      // tokenExpiration: response.data.expiresIn
     })
+
   },
   saveMatches({ commit }) {
     console.log("saveMatches en el actions")

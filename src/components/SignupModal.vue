@@ -18,12 +18,15 @@
       <input type="password" v-model="password" />
       <div v-if="isLoading"><p>Authenticating...</p></div>
       <br />
+      <!-- esto es por el tutorial que recibe el error en la respuesta de la llamada, pero yo ya lo hacia con vue
+      <div v-html="error"> </div> -->
       <button class="loginButton" @click="signSubmit">Signup</button>
     </div>
   </div>
 </template>
 
 <script>
+// import AuthenticationService from '@/services/AuthenticationService';
 export default {
   name: "SignupModal",
   data() {
@@ -43,15 +46,34 @@ export default {
     },
     // Async en el signSUbmit y await en el dispatch no es necesario, pero es para que hasta que no llegue la respuesta no deje de hacer el loading, despues ya que se ejecute
     async signSubmit() {
-      console.log("entrando en el signSubimit");
-      //---------con esto guardo en una tabla
-      fetch("https://brazo2.firebaseio.com/users.json", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: this.email, password: this.password }),
-      });
+      /// con mysql
+      // esto al final ponerlo en el store
+      // try{
+
+        // const response = await AuthenticationService.register({
+        //   email: this.email,
+        //   password: this.password,
+        //   name: this.name
+        // })
+        // await this.$store.dispatch("signup", {
+        //   email: this.email,
+        //   password: this.password,
+        // })
+        // console.log("response.data del signupmodal")
+      // }catch (error) {
+        // this.error = error.response.data.error
+      // }
+
+      /// con firebase
+      // console.log("entrando en el signSubimit");
+      // //---------con esto guardo en una tabla
+      // fetch("https://brazo2.firebaseio.com/users.json", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ email: this.email, password: this.password }),
+      // });
       //--------Get para traer de la tabla
       // fetch("https://brazo2.firebaseio.com/users.json")
       //   .then((response) => {
@@ -65,8 +87,9 @@ export default {
       this.formisvalid = true;
       if (
         this.email === "" ||
-        !this.email.includes("@") ||
-        this.password.length < 6
+        !this.email.includes("@") 
+        // ||
+        // this.password.length < 6
       ) {
         this.formisvalid = true;
         return;

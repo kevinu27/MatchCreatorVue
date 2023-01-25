@@ -1,3 +1,4 @@
+
 export default {
   pageForward(state) {
     state.currentPage += 1
@@ -349,9 +350,10 @@ export default {
   },
   ///AUTH
   setUser(state, payload) {
+    console.log("en el mutation el payload es:", payload)
     state.token = payload.token
     state.userId = payload.userId
-    state.tokenExpiration = payload.tokenExpiration
+    // state.tokenExpiration = payload.tokenExpiration
   }
 
 

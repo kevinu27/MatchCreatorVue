@@ -18,6 +18,8 @@ const store = createStore ({
             token: null,
             tokenExpiration:null,
             matchesDisplayed: false,
+            user: null,
+            isUserLoggedIn: false
         }     
     },
     actions: rootActions,
