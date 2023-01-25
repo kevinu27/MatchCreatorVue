@@ -52,10 +52,8 @@ export default {
       email: payload.email,
       password: payload.password,
     })
-    console.log("pasa por aqui?")
-    console.log("response", response)
+    // console.log("response", response)
     const responseData = response
-    console.log("responseData.token",responseData.data.user)
 
     if (!response) {
       console.log("respondeDAta en momento de error", responseData)
@@ -70,7 +68,6 @@ export default {
     console.log("typeof expirationDate", typeof expirationDate)
     console.log("expirationDate---------",expirationDate)
 
-    console.log("responseData", responseData)
     context.commit('setUser', {
       token: response.data.token,
       userId: response.data.user.id,
@@ -99,11 +96,7 @@ export default {
     commit('saveMatches')
   },
 
-  // logout(state) {
-  //   state.token = null
-  //   state.userId = null
-  //   state.tokenExpiration = null
-  // },
+
   autoLogin(context){
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
@@ -114,6 +107,8 @@ export default {
       userId: userId,
 
     })
+
+    // y comprobar aqui que la fecha del expires in con la fecha actual
   }
 
   },
@@ -124,6 +119,7 @@ export default {
     context.commit('setUser', {
       token: null,
       userId: null,
+      tokenExpiration: null
     })
 
   },

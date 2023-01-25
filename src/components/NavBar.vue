@@ -9,7 +9,7 @@
           <!-- <li><a href="#">Home</a></li> -->
           <!-- <li><router-link to="/profile"> Profile</router-link></li> -->
           <div class="dropdown">
-            <li class="router-link-styles"> User</li>
+            <li class="router-link-styles" > User  </li>
             <div class="dropdown-content">
               <router-link to="/profile" v-if="isLoggedIn">Profile</router-link>
               <a href="#" @click="openModalLogin" v-if="!isLoggedIn">login</a>
@@ -204,5 +204,8 @@ a.router-link-active {
   text-align: center;
   display: block;
   text-decoration: none;
+}
+.router-link-styles:hover{
+  cursor: pointer;
 }
 </style>
