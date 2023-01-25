@@ -47,35 +47,37 @@ export default {
   },
   //AUTH
   async login(context, payload) {
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOOlaLy5WDpDuGz3PTPLCdGLpqX_iHHWs', {
-      method: 'POST',
-      body: JSON.stringify({
-        // name: payload.name,
-        email: payload.email,
-        password: payload.password,
-        returnSecureToken: true
-      })
+
+    const response = await AuthenticationService.login({
+      email: payload.email,
+      password: payload.password,
     })
-    const responseData = await response.json();
-    if (!response.ok) {
+    console.log("pasa por aqui?")
+    console.log("response", response)
+    const responseData = response
+    console.log("responseData.token",responseData.data.user)
+
+    if (!response) {
       console.log("respondeDAta en momento de error", responseData)
-// console.log("email", email)
       const error = new Error(responseData.message || 'failed to authenticate.')
       throw error;
     }
-    const expiresIn = +responseData.expiresIn * 1000  // el "+" convierte la string a number, y "* 1000" está multiplicando por milisecond para pasar las unidades a miliseconds
+    const expiresIn = 60* 1000  // el "+" convierte la string a number, y "* 1000" está multiplicando por milisecond para pasar las unidades a miliseconds
     const expirationDate = new Date().getTime() + expiresIn
-    localStorage.setItem('token', responseData.idToken)
-    localStorage.setItem('userId', responseData.userId)
+    localStorage.setItem('token', response.data.token)
+    localStorage.setItem('userId', response.data.user.id)
     localStorage.setItem('tokenExpiration', expirationDate)
+    console.log("typeof expirationDate", typeof expirationDate)
+    console.log("expirationDate---------",expirationDate)
 
     console.log("responseData", responseData)
     context.commit('setUser', {
-      token: responseData.idToken,
-      userId: responseData.userId,
+      token: response.data.token,
+      userId: response.data.user.id,
       tokenExpiration: expirationDate
     })
   },
+  
   async signup(context, payload) { // async con await es alternativa al .then()
  
       const response = await AuthenticationService.register({
@@ -85,23 +87,6 @@ export default {
       })
       console.log("response.data en el action,js", response.data)
  
-    
-    // const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCOOlaLy5WDpDuGz3PTPLCdGLpqX_iHHWs', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     // name: payload.name,
-    //     email: payload.email,
-    //     password: payload.password,
-    //     returnSecureToken: true
-    //   })
-    // })
-    // const responseData = await response.json();
-    // if (!response.ok) {
-    //   console.log("respondeDAta en momento de error", responseData)
-    //   const error = new Error(responseData.message || 'failed to authenticate.')
-    //   throw error;
-    // }
-    // console.log("responseData", responseData)
     context.commit('setUser', {
       token: response.data.token,
       userId: response.data.user.id,
@@ -135,6 +120,7 @@ export default {
   logout(context) {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
+    localStorage.removeItem('tokenExpiration')
     context.commit('setUser', {
       token: null,
       userId: null,

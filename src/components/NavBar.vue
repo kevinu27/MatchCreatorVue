@@ -9,7 +9,7 @@
           <!-- <li><a href="#">Home</a></li> -->
           <!-- <li><router-link to="/profile"> Profile</router-link></li> -->
           <div class="dropdown">
-            <li><router-link to="/profile"> User</router-link></li>
+            <li class="router-link-styles"> User</li>
             <div class="dropdown-content">
               <router-link to="/profile" v-if="isLoggedIn">Profile</router-link>
               <a href="#" @click="openModalLogin" v-if="!isLoggedIn">login</a>
@@ -196,5 +196,13 @@ a.router-link-active {
 
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+}
+
+.router-link-styles{
+  padding: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  text-decoration: none;
 }
 </style>
