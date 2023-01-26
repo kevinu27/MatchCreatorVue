@@ -8,6 +8,8 @@
         <ul class="navbar__links">
           <!-- <li><a href="#">Home</a></li> -->
           <!-- <li><router-link to="/profile"> Profile</router-link></li> -->
+          <li class="router-link-styles" v-if="isLoggedIn" > Welcome,{{ this.$store.state.userName }} <!-- aqui poner nombre cuando lo pida de la base de datos--> </li>
+
           <div class="dropdown">
             <li class="router-link-styles" > User  </li>
             <div class="dropdown-content">
@@ -30,12 +32,18 @@ import { translation } from "./../../configuration.js"
 export default {
   name: "NavBar",
   data() {
-    return {};
+    return { 
+      userName: ""
+  };
   },
   computed:{
     isLoggedIn(){
       return this.$store.getters.isAuthenticated
-    }
+    },
+    // getUserName(){
+    //   this.userName = this.$store.getters.userName
+    //   return ""
+    // }
   },
   methods: {
     logout(){

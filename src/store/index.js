@@ -19,6 +19,7 @@ const store = createStore ({
             tokenExpiration:null,
             matchesDisplayed: false,
             user: null,
+            userName: null,
             isUserLoggedIn: false
         }     
     },

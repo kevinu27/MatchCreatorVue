@@ -51,6 +51,7 @@ export default {
     const response = await AuthenticationService.login({
       email: payload.email,
       password: payload.password,
+      name: payload.name
     })
     // console.log("response", response)
     const responseData = response
@@ -71,7 +72,8 @@ export default {
     context.commit('setUser', {
       token: response.data.token,
       userId: response.data.user.id,
-      tokenExpiration: expirationDate
+      tokenExpiration: expirationDate,
+      userName: response.data.user.name
     })
   },
   

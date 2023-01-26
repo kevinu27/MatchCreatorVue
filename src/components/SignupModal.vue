@@ -99,6 +99,7 @@ export default {
         await this.$store.dispatch("signup", {
           email: this.email,
           password: this.password,
+          name: this.name
         });
       } catch (err) {
         this.error = err.message || "failed to authenticate";
