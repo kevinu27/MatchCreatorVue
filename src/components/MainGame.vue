@@ -1,4 +1,5 @@
 <template>
+  <ranking-players></ranking-players>
   <div>
     <h1>
       {{ translationLabel.welcome }}
@@ -35,6 +36,7 @@ import MatchesList from "./MatchesList.vue";
 import RankingList from "./RankingList.vue";
 import LoginModal from "./LoginModal.vue";
 import SignupModal from "./SignupModal.vue";
+import RankingPlayers from "./RankingPlayers.vue";
 // import UserProfile from './UserProfile.vue'; // no es necesario importarlo porque ya los estamos importando de de router
 
 export default {
@@ -67,9 +69,14 @@ export default {
     RankingList,
     LoginModal,
     SignupModal,
+    RankingPlayers
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+
+
+
+</style>
