@@ -3,6 +3,10 @@
       <h1>  
         Top players
       </h1>
+
+      <li v-for="(user, index) in users" v-bind:key="index" class="ranking-players">
+        <p>{{ user.name }}</p>
+    </li>
     </div>
 
       
@@ -28,7 +32,9 @@
       },
     },
     async mounted() {
-      this.users = await UsersService.getAllUsers()
+      const rawData = await UsersService.getAllUsers()
+      this.users = rawData.data
+      await console.log("  this.users",   this.users)
     },
 
   };
@@ -39,14 +45,14 @@
   
   .ranking{
     position: absolute;
-    /* background-color: red; */
-  background-color: #efefef;
-
+    background-color: #efefef;
     border: 1px solid gray;
     z-index: 96;
     width: 20%;
     min-height: 100%;
   }
-  
+  .ranking-players{
+list-style: none;
+  }
   </style>
   
