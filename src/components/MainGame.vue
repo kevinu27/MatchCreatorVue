@@ -24,6 +24,7 @@
     <PlayerInputs></PlayerInputs>
     <MatchesList></MatchesList>
     <RankingList></RankingList>
+
   </div>
 </template>
 

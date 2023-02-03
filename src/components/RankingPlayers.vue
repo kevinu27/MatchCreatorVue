@@ -1,12 +1,13 @@
 <template>
     <div class="ranking">
-      <h1>  
+      <h1  @click="maximize">  
         Top players
       </h1>
-
-      <li v-for="(user, index) in users" v-bind:key="index" class="ranking-players">
+<div v-if="isRankingVisible">
+      <li v-for="(user, index) in users" v-bind:key="index" class="ranking-players" >
         <p>{{ user.name }}</p>
     </li>
+  </div>
     </div>
 
       
@@ -23,13 +24,17 @@
     },
     data() {
       return {
-        users:null
+        users:null,
+        isRankingVisible: false
       };
     },
     methods: {
       translation() {
         this.translationLabel.welcome = translation.welcomeLabel.english;
       },
+      maximize(){
+        this.isRankingVisible = !this.isRankingVisible
+      }
     },
     async mounted() {
       const rawData = await UsersService.getAllUsers()
@@ -47,9 +52,9 @@
     position: absolute;
     background-color: #efefef;
     border: 1px solid gray;
-    z-index: 96;
+    /* z-index: 96; */
     width: 20%;
-    min-height: 100%;
+    /* min-height: 100%; */
   }
   .ranking-players{
 list-style: none;
