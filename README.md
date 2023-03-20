@@ -13,6 +13,7 @@ https://matchmakervue.herokuapp.com/
 <li>13- si pones partidos filtrados que nadie juegue mas partidos que otros </li>
 <li>14 - autologout despues de un tiempo </li>
 <li>15 - homogeneizar como se piden cosas al estado, es decir, en unos sitios estar con $store.state. y en otros con el mapactions y mapgetters</li>
-<li>16 - poner los de los buttons is juegas al crokinole etc</li>
+<li>16 - poner los de los battons del crokinole si juegas al crokinole, o gol de portero a porteo sii juegas al futbolin, etc</li>
 <li>17 - poner un archvo router </li>
 <li>18 - poner las llamadas en el actions y mutations y estado </li>
+<li>20 - añadir una pestaña donde salga partido ganado o perdido </li>
