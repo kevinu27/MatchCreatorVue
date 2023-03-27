@@ -20,7 +20,8 @@ const store = createStore ({
             matchesDisplayed: false,
             user: null,
             userName: null,
-            isUserLoggedIn: false
+            isUserLoggedIn: false,
+            ScoringMethods: 'byPoints'
         }     
     },
     actions: rootActions,
