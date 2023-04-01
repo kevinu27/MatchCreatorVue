@@ -29,9 +29,11 @@ import {mapGetters} from 'vuex'
       },
       setMatchScore_2vs2(event, id){
         this.$store.dispatch("setSetMatchScore_2vs2", { event: event, id: id });
+        this.$store.commit("setMatchVictory_2vs2", { event: event, id: id });
       },
       setMatchScore2_2vs2(event, id){
         this.$store.dispatch("setSetMatchScore2_2vs2", { event: event, id: id });
+        this.$store.commit("setMatchVictory2_2vs2", { event: event, id: id });
       },
       setMatchScore_1vs1(event, id){
         this.$store.dispatch("setSetMatchScore_1vs1", { event: event, id: id });

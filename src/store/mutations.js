@@ -214,8 +214,10 @@ export default {
     const stateMatchesCopy = [...state.matches]
     const matchScoringPoints = stateMatchesCopy.find((match) => match.id === payload.id)
     matchScoringPoints.teams[0].points = points
-
+    
     const matchesFlateados = state.matches.map((match) => match.teams).flat()
+    // console.log('----matchesFlateados------!!!!', matchesFlateados)
+    // console.log('----state.matches------!!!!',  state.matches)
     for (let i = 0; i < state.newPlayers.length; i++) {
       let pointsArrayToPushToThePlayer = [0, 0]
       const playerToPushThePointsId = state.newPlayers[i].playerIndex
@@ -223,11 +225,11 @@ export default {
       for (let j = 0; j < matchesFlateados.length; j++) {
         if (playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex) {
           pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-
+          
         }
         if (playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex) {
           pointsArrayToPushToThePlayer.push(matchesFlateados[j].points)
-
+          
         }
       }
       state.newPlayers[i].points = pointsArrayToPushToThePlayer.reduce(reducer);
@@ -236,6 +238,108 @@ export default {
       return b.points - a.points;
     });
     state.newPlayers = sortedPlayers
+   
+  },
+
+  setMatchVictory_2vs2(state, payload ) {
+    const victory = 1 
+    const stateMatchesCopy = [...state.matches]
+    const matchScoringPoints = stateMatchesCopy.find((match) => match.id === payload.id)
+    if(matchScoringPoints.teams[0].points > matchScoringPoints.teams[1].points) {
+      matchScoringPoints.teams[0].members.victory = 1 
+      matchScoringPoints.teams[1].members.victory = 0
+    }
+    if(matchScoringPoints.teams[0].points < matchScoringPoints.teams[1].points) {
+      matchScoringPoints.teams[1].members.victory = 1 
+      matchScoringPoints.teams[0].members.victory = 0
+    }
+    
+    const matchesFlateados = state.matches.map((match) => match.teams).flat()
+    // console.log('----matchesFlateados------!!!!......', matchesFlateados)
+    console.log('----matchesstates------!!!!......!!!!!', state.matches)
+
+    // console.log('----state.matches------!!!!',  state.matches)
+    for (let i = 0; i < state.newPlayers.length; i++) {
+      let pointsArrayToPushToThePlayer = [0, 0]
+      const playerToPushThePointsId = state.newPlayers[i].playerIndex
+      const reducer = (previousValue, currentValue) => previousValue + currentValue;
+      for (let j = 0; j < matchesFlateados.length; j++) {
+        if (playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex && matchesFlateados[j].victory) {
+          pointsArrayToPushToThePlayer.push(victory)
+          
+        }
+        if (playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex && matchesFlateados[j].victory) {
+          pointsArrayToPushToThePlayer.push(victory)
+          
+        }
+      }
+      if(matchScoringPoints.teams[0].points > matchScoringPoints.teams[1].points) {
+        matchScoringPoints.teams[0].victory = 1 
+        matchScoringPoints.teams[1].victory = 0
+      }
+      if(matchScoringPoints.teams[0].points < matchScoringPoints.teams[1].points) {
+        matchScoringPoints.teams[1].victory = 1 
+        matchScoringPoints.teams[0].victory = 0
+      }
+      state.newPlayers[i].victory = pointsArrayToPushToThePlayer.reduce(reducer);
+    }
+    const sortedPlayers = [...state.newPlayers].sort((a, b) => {
+      return b.points - a.points;
+    });
+    state.newPlayers = sortedPlayers
+    
+    
+
+  },
+  setMatchVictory2_2vs2() {
+    // const victory = 1
+    // const stateMatchesCopy = [...state.matches]
+    // const matchScoringPoints = stateMatchesCopy.find((match) => match.id === payload.id)
+    // if(matchScoringPoints.teams[0].points > matchScoringPoints.teams[1].points) {
+    //   matchScoringPoints.teams[0].victory = 1 
+    //   matchScoringPoints.teams[1].victory = 0
+    // }
+    // if(matchScoringPoints.teams[0].points < matchScoringPoints.teams[1].points) {
+    //   matchScoringPoints.teams[1].victory = 1 
+    //   matchScoringPoints.teams[0].victory = 0
+    // }
+    
+    // const matchesFlateados = state.matches.map((match) => match.teams).flat()
+    // // console.log('----matchesFlateados------!!!!......', matchesFlateados)
+    // console.log('----matchesstates------!!!!......', state.matches)
+
+    // // console.log('----state.matches------!!!!',  state.matches)
+    // for (let i = 0; i < state.newPlayers.length; i++) {
+    //   let pointsArrayToPushToThePlayer = [0, 0]
+    //   const playerToPushThePointsId = state.newPlayers[i].playerIndex
+    //   const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    //   for (let j = 0; j < matchesFlateados.length; j++) {
+    //     if (playerToPushThePointsId === matchesFlateados[j].members[0].playerIndex) {
+    //       pointsArrayToPushToThePlayer.push(victory)
+          
+    //     }
+    //     if (playerToPushThePointsId === matchesFlateados[j].members[1].playerIndex) {
+    //       pointsArrayToPushToThePlayer.push(victory)
+          
+    //     }
+    //   }
+    //   if(matchScoringPoints.teams[0].points > matchScoringPoints.teams[1].points) {
+    //     matchScoringPoints.teams[0].victory = 1 
+    //     matchScoringPoints.teams[1].victory = 0
+    //   }
+    //   if(matchScoringPoints.teams[0].points < matchScoringPoints.teams[1].points) {
+    //     matchScoringPoints.teams[1].victory = 1 
+    //   matchScoringPoints.teams[0].victory = 0
+    //   }
+    //   state.newPlayers[i].victory = pointsArrayToPushToThePlayer.reduce(reducer);
+    // }
+    // const sortedPlayers = [...state.newPlayers].sort((a, b) => {
+    //   return b.points - a.points;
+    // });
+    // state.newPlayers = sortedPlayers
+    
+    
+
   },
 
   setMatchScore2_2vs2(state, payload) {
