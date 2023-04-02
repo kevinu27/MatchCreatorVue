@@ -16,4 +16,4 @@ https://matchmakervue.herokuapp.com/
 <li>16 - poner los de los battons del crokinole si juegas al crokinole, o gol de portero a porteo sii juegas al futbolin, etc</li>
 <li>17 - poner un archvo router </li>
 <li>18 - poner las llamadas en el actions y mutations y estado </li>
-<li>20 - añadir una pestaña donde salga partido ganado o perdido </li>
+<li>20 - añadir una pestaña donde salga partido ganado o perdido --- falta ponerlo para 1vs1 </li>
