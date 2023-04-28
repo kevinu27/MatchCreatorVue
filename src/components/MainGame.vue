@@ -24,6 +24,7 @@
     <PlayerInputs></PlayerInputs>
     <MatchesList></MatchesList>
     <RankingList></RankingList>
+    <MapMarker></MapMarker>
 
   </div>
 </template>
@@ -38,6 +39,7 @@ import RankingList from "./RankingList.vue";
 import LoginModal from "./LoginModal.vue";
 import SignupModal from "./SignupModal.vue";
 import RankingPlayers from "./RankingPlayers.vue";
+import MapMarker from  "./MapMarker.vue";
 // import UserProfile from './UserProfile.vue'; // no es necesario importarlo porque ya los estamos importando de de router
 
 export default {
@@ -70,7 +72,8 @@ export default {
     RankingList,
     LoginModal,
     SignupModal,
-    RankingPlayers
+    RankingPlayers,
+    MapMarker
   },
 };
 </script>

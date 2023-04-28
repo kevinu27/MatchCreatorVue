@@ -314,26 +314,48 @@ export default {
     const stateMatchesCopy = [...state.matches]
     const matchScoringPoints = stateMatchesCopy.find((match) => parseInt(match.matchId) === parseInt(payload.id))
     matchScoringPoints.teams[0].points = points
+    console.log('matchScoringPoints antes de los ifs', matchScoringPoints)
+    if(matchScoringPoints.teams[0].points > matchScoringPoints.teams[1].points) {
+      matchScoringPoints.teams[0].victory = 1 
+      matchScoringPoints.teams[1].victory = 0
+      console.log('----entroen en el priemr if')
+    }
+    if(matchScoringPoints.teams[0].points < matchScoringPoints.teams[1].points) {
+      matchScoringPoints.teams[1].victory = 1 
+      matchScoringPoints.teams[0].victory = 0
+      console.log('----entroen en el segundo if')
+
+    }
+    console.log('matchScoringPoints despues de los ifs', matchScoringPoints)
+
     for (let i = 0; i < state.newPlayers.length; i++) {
       let pointsArrayToPushToThePlayer = [0, 0]
+      let victoriesArrayToPushToThePlayer = [0, 0]
       const playerToPushThePointsId = state.newPlayers[i].playerIndex
       const reducer = (previousValue, currentValue) => previousValue + currentValue;
       for (let j = 0; j < state.matches.length; j++) {
         if (playerToPushThePointsId === state.matches[j].teams[0].members[0].playerIndex) {
           const pointToPush = state.matches[j].teams[0].points
           pointsArrayToPushToThePlayer.push(pointToPush)
+          victoriesArrayToPushToThePlayer.push(state.matches[j].victory)
+
         }
         if (playerToPushThePointsId === state.matches[j].teams[1].members[0].playerIndex) {
           const pointToPush = state.matches[j].teams[1].points
           pointsArrayToPushToThePlayer.push(pointToPush)
+          victoriesArrayToPushToThePlayer.push(state.matches[j].victory)
         }
       }
       state.newPlayers[i].points = pointsArrayToPushToThePlayer.reduce(reducer);
+      state.newPlayers[i].points = victoriesArrayToPushToThePlayer.reduce(reducer);
     }
     const sortedPlayers = [...state.newPlayers].sort((a, b) => {
       return b.points - a.points;
     });
     state.newPlayers = sortedPlayers
+    console.log('matches-----', state.matches)
+   console.log('state.newPlayers---2-2_2-2_2-2-22-2-2-2_', state.newPlayers)
+
   },
 
   setMatchScore2_1vs1(state, payload) {
