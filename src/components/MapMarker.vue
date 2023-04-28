@@ -15,13 +15,14 @@
     mounted() {
       // Load the Google Maps JavaScript API asynchronously
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.VUE_APP_GOOGLE_MAPS_API_KEY}&callback=initMap`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.VUE_APP_MAP}&callback=initMap`;
       script.defer = true;
       script.async = true;
       window.initMap = this.initMap;
       document.head.appendChild(script);
       console.log('script.src------', script.src)
-      console.log('process.env.VUE_APP_GOOGLE_MAPS_API_KEY.src------', process.env.VUE_APP_GOOGLE_MAPS_API_KEY)
+      console.log('process.env.VUE_APP_GOOGLE_MAPS_API_KEY.src------', process.env.VUE_APP_URL)
+      console.log('VUE_APP_MAP!!!!!!!!!!!', process.env.VUE_APP_MAP)
       
     },
     methods: {
